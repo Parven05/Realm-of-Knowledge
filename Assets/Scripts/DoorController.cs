@@ -8,9 +8,11 @@ public class DoorController : MonoBehaviour
     private bool isOpen = false;
 
     private void Start()
-
     {
-       doorAnimator = doorObject.GetComponent<Animator>();
+        if (doorObject != null)
+            doorAnimator = doorObject.GetComponent<Animator>();
+        else
+            Debug.LogError("Door object is not assigned!");
     }
 
     private void OnTriggerEnter(Collider other)
