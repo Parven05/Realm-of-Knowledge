@@ -2,34 +2,55 @@ using UnityEngine;
 
 public class LiftController : MonoBehaviour
 {
-    public GameObject liftObject; // Reference to the GameObject with the Animator component
+    public float liftSpeed = 1f; // Speed at which the lift moves
+    public Transform liftTop; // The transform representing the highest position the lift can reach
 
-    private Animator liftAnimator;
-    private bool isUp = false;
+    private Vector3 initialPosition; // The initial position of the lift
+    private bool isPlayerInside; // Flag to track if the player is inside the lift
 
     private void Start()
     {
-        if (liftObject != null)
-            liftAnimator = liftObject.GetComponent<Animator>();
-        else
-            Debug.LogError("Lift object is not assigned!");
+        initialPosition = transform.position;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        if (other.CompareTag("Player") && !isUp)
+        if (isPlayerInside)
         {
-            liftAnimator.SetBool("isUp", true);
-            isUp = true;
+            if (transform.position.y < liftTop.position.y)
+            {
+                float newY = Mathf.Lerp(transform.position.y, liftTop.position.y, liftSpeed * Time.deltaTime);
+                transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+            }
+            else if (transform.position.y > liftTop.position.y)
+            {
+                float newY = Mathf.Lerp(transform.position.y, initialPosition.y, liftSpeed * Time.deltaTime);
+                transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+            }
+        }
+        else
+        {
+            if (transform.position.y > initialPosition.y)
+            {
+                float newY = Mathf.Lerp(transform.position.y, initialPosition.y, liftSpeed * Time.deltaTime);
+                transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+            }
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Player") && isUp)
+        if (collision.gameObject.CompareTag("Player"))
         {
-            liftAnimator.SetBool("isUp", false);
-            isUp = false;
+            isPlayerInside = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isPlayerInside = false;
         }
     }
 }
