@@ -2811,7 +2811,7 @@ GameObject:
   - component: {fileID: 375239943}
   m_Layer: 0
   m_Name: 'Hallway '
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -6428,7 +6428,7 @@ GameObject:
   - component: {fileID: 476148312}
   m_Layer: 0
   m_Name: Third Room
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -18964,7 +18964,7 @@ GameObject:
   - component: {fileID: 582609543}
   m_Layer: 0
   m_Name: Puzzle Room 3
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -27834,7 +27834,7 @@ GameObject:
   - component: {fileID: 616459563}
   m_Layer: 0
   m_Name: Quiz Room
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -41146,7 +41146,7 @@ GameObject:
   - component: {fileID: 961940906}
   m_Layer: 0
   m_Name: Puzzle Room 2
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -60215,7 +60215,7 @@ GameObject:
   - component: {fileID: 1288445683}
   m_Layer: 0
   m_Name: Puzzle Main Room
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -71949,7 +71949,7 @@ GameObject:
   - component: {fileID: 1542517622}
   m_Layer: 0
   m_Name: Hallway 4
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -73814,7 +73814,7 @@ GameObject:
   - component: {fileID: 1555122832}
   m_Layer: 0
   m_Name: Hallway 3
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -81679,7 +81679,7 @@ GameObject:
   - component: {fileID: 1636705907}
   m_Layer: 0
   m_Name: Second Room
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -88576,7 +88576,7 @@ GameObject:
   - component: {fileID: 1673863164}
   m_Layer: 0
   m_Name: Hallway 2
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -90890,7 +90890,7 @@ GameObject:
   - component: {fileID: 1738949873}
   m_Layer: 0
   m_Name: Starting Point
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -98577,7 +98577,7 @@ GameObject:
   - component: {fileID: 1889027383}
   m_Layer: 0
   m_Name: Puzzle Room 1
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -109273,7 +109273,7 @@ GameObject:
   - component: {fileID: 154550171222810088}
   m_Layer: 0
   m_Name: Hallway 5
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

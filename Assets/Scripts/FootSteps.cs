@@ -7,6 +7,7 @@ public class FootSteps : MonoBehaviour
 
     private bool isMoving = false;
     private bool isJumping = false;
+    private bool isGrounded = true;
 
     private void Update()
     {
@@ -27,17 +28,24 @@ public class FootSteps : MonoBehaviour
             isMoving = false;
         }
 
-        if (isJumpKeyPressed)
+        if (isJumpKeyPressed && isGrounded && !isJumping)
         {
-            if (!isJumping)
-            {
-                jumpSfx.Play();
-                isJumping = true;
-            }
+            jumpSfx.Play();
+            isJumping = true;
+            isGrounded = false;
         }
-        else
+
+        if (!isJumpKeyPressed)
         {
             isJumping = false;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
         }
     }
 }
