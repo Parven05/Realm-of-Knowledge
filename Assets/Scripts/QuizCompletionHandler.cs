@@ -3,6 +3,7 @@ using UnityEngine;
 public class QuizCompletionHandler : MonoBehaviour
 {
     [SerializeField] private ScoreManager scoreManager;
+    [SerializeField] private AudioSource completedSfx;
 
     private Renderer buttonRenderer;
 
@@ -30,6 +31,7 @@ public class QuizCompletionHandler : MonoBehaviour
     {
         if (currentScore >= 5 && !colorChanged)
         {
+            completedSfx.Play();
             SetButtonColor(Color.green);
             colorChanged = true;
         }
