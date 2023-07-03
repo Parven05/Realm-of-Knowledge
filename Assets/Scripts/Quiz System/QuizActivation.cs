@@ -9,6 +9,7 @@ public class QuizActivation : MonoBehaviour
     [SerializeField] private TextMeshProUGUI quizText;
     [SerializeField] private GameObject quizScreen;
     [SerializeField] private AudioSource screenOnSfx;
+    [SerializeField] private string cubeTag; // New serialized field for the cube tag
 
     private Renderer buttonRenderer;
     private Renderer quizRenderer;
@@ -28,13 +29,13 @@ public class QuizActivation : MonoBehaviour
             quizManager.enabled = false;
             quizText.enabled = false;
         }
-
     }
 
     private void SetButtonClicked(bool isClicked)
     {
         buttonAnimate.SetBool("isClicked", isClicked);
     }
+
     private void SetButtonColor(Color color)
     {
         buttonRenderer.material.color = color;
@@ -47,7 +48,7 @@ public class QuizActivation : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("CubeOrange") && !buttonClicked && !quizActivated)
+        if (collision.gameObject.CompareTag(cubeTag) && !buttonClicked && !quizActivated)
         {
             buttonClicked = true;
 
@@ -60,14 +61,12 @@ public class QuizActivation : MonoBehaviour
             SetScreenColor(Color.white);
             quizManager.enabled = true;
             quizText.enabled = true;
-           
-
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("CubeOrange") && buttonClicked && quizActivated)
+        if (collision.gameObject.CompareTag(cubeTag) && buttonClicked && quizActivated)
         {
             buttonClicked = false;
 
@@ -78,7 +77,6 @@ public class QuizActivation : MonoBehaviour
             SetScreenColor(Color.black);
             quizManager.enabled = false;
             quizText.enabled = false;
-
         }
     }
 }

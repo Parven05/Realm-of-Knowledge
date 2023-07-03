@@ -4,6 +4,7 @@ public class QuizCompletionHandler : MonoBehaviour
 {
     [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private AudioSource completedSfx;
+    [SerializeField] private float targetScore;
 
     private Renderer buttonRenderer;
 
@@ -29,7 +30,7 @@ public class QuizCompletionHandler : MonoBehaviour
 
     private void HandleScoreUpdated(int currentScore)
     {
-        if (currentScore >= 5 && !colorChanged)
+        if (currentScore >= targetScore && !colorChanged)
         {
             completedSfx.Play();
             SetButtonColor(Color.green);
