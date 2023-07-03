@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DoorActivationCube
   - Ground
+  - CubeOrange
   layers:
   - Default
   - TransparentFX
