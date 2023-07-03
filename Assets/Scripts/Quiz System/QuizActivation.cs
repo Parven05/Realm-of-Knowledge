@@ -7,14 +7,17 @@ public class QuizActivation : MonoBehaviour
     [SerializeField] private AudioSource buttonClickSfx;
     [SerializeField] private QuizManager quizManager;
     [SerializeField] private TextMeshProUGUI quizText;
+    [SerializeField] private GameObject quizScreen;
 
     private Renderer buttonRenderer;
+    private Renderer quizRenderer;
     private bool buttonClicked = false;
     private bool quizActivated = false;
 
     private void Start()
     {
         quizManager = FindObjectOfType<QuizManager>();
+        quizRenderer = quizScreen.GetComponent<Renderer>();
         buttonAnimate = GetComponent<Animator>();
         buttonRenderer = GetComponent<Renderer>();
 
@@ -36,6 +39,11 @@ public class QuizActivation : MonoBehaviour
         buttonRenderer.material.color = color;
     }
 
+    private void SetScreenColor(Color color)
+    {
+        quizRenderer.material.color = color;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("CubeOrange") && !buttonClicked && !quizActivated)
@@ -47,6 +55,7 @@ public class QuizActivation : MonoBehaviour
             SetButtonClicked(true);
 
             quizActivated = true;
+            SetScreenColor(Color.white);
             quizManager.enabled = true;
             quizText.enabled = true;
            
@@ -65,6 +74,7 @@ public class QuizActivation : MonoBehaviour
             SetButtonClicked(false);
 
             quizActivated = false;
+            SetScreenColor(Color.black);
             quizManager.enabled = false;
             quizText.enabled = false;
 
