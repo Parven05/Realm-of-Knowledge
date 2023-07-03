@@ -24,6 +24,8 @@ public class QuizManager : MonoBehaviour
     private bool quizCompleted = false;
     private int correctAnswerCount = 0;
 
+
+
     private void Start()
     {
         quizCanvas.SetActive(false);
@@ -122,6 +124,8 @@ public class QuizManager : MonoBehaviour
 
         int currentScore = scoreManager.GetCurrentScore();
         scoreText.text = "Score: " + currentScore;
+
+
     }
 
     private void ExitQuiz()

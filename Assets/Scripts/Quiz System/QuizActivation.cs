@@ -8,6 +8,7 @@ public class QuizActivation : MonoBehaviour
     [SerializeField] private QuizManager quizManager;
     [SerializeField] private TextMeshProUGUI quizText;
     [SerializeField] private GameObject quizScreen;
+    [SerializeField] private AudioSource screenOnSfx;
 
     private Renderer buttonRenderer;
     private Renderer quizRenderer;
@@ -55,11 +56,11 @@ public class QuizActivation : MonoBehaviour
             SetButtonClicked(true);
 
             quizActivated = true;
+            screenOnSfx.Play();
             SetScreenColor(Color.white);
             quizManager.enabled = true;
             quizText.enabled = true;
            
-
 
         }
     }
