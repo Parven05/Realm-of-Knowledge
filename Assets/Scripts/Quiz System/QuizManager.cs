@@ -6,28 +6,23 @@ using TMPro;
 
 public class QuizManager : MonoBehaviour
 {
-    public GameObject quizCanvas;
-    public GameObject resultCanvas;
-    public Text questionText;
-    public Button tryAgainButton;
-    public Button exitButton;
-    public Button[] answerButtons;
-    public Text resultText;
-    public Text scoreText;
-    public TextMeshProUGUI openText;
-
-    public Question[] questions;
-    public ScoreManager scoreManager;
-    public FirstPersonController firstPersonController;
-    public ToggleInventory inventory;
-    public Animator animator;
+    [SerializeField] private GameObject quizCanvas;
+    [SerializeField] private GameObject resultCanvas;
+    [SerializeField] private TextMeshProUGUI questionText;
+    [SerializeField] private Button tryAgainButton;
+    [SerializeField] private Button exitButton;
+    [SerializeField] private Button[] answerButtons;
+    [SerializeField] private TextMeshProUGUI resultText;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private Question[] questions;
+    [SerializeField] private ScoreManager scoreManager;
+    [SerializeField] private FirstPersonController firstPersonController;
 
     private List<Question> questionPool = new List<Question>();
     private Queue<Question> currentQuestionSet = new Queue<Question>();
     private bool quizTriggered = false;
     private bool quizCompleted = false;
     private int correctAnswerCount = 0;
-
 
     private void Start()
     {
@@ -36,7 +31,6 @@ public class QuizManager : MonoBehaviour
         SetCursorState(false);
         exitButton.onClick.AddListener(ExitQuiz);
         tryAgainButton.onClick.AddListener(TryAgain);
-        animator = FindAnyObjectByType<Animator>();
         InitializeQuestionPool();
     }
 
@@ -75,8 +69,6 @@ public class QuizManager : MonoBehaviour
             firstPersonController.cameraCanMove = false;
             quizCanvas.SetActive(true);
             StartQuiz();
-            inventory.enabled = false;
-
         }
     }
 
@@ -97,20 +89,12 @@ public class QuizManager : MonoBehaviour
         if (buttonIndex == currentQuestion.correctAnswerIndex)
         {
             scoreManager.AddScore(currentQuestion.scorePoints);
-            Debug.Log("Correct Answer!");
-           
-
             correctAnswerCount++;
             if (correctAnswerCount == 5)
             {
                 QuizCompleted();
                 return;
             }
-        }
-        else
-        {
-            Debug.Log("Wrong Answer!");
-         
         }
 
         currentQuestionSet.Dequeue();
@@ -125,11 +109,8 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-
     private void QuizCompleted()
     {
-        Debug.Log("Quiz completed! Score: " + scoreManager.GetCurrentScore());
-        openText.gameObject.SetActive(false);
         Time.timeScale = 0f;
         quizCompleted = true;
         firstPersonController.cameraCanMove = false;
@@ -141,9 +122,6 @@ public class QuizManager : MonoBehaviour
 
         int currentScore = scoreManager.GetCurrentScore();
         scoreText.text = "Score: " + currentScore;
-
-        animator.SetBool("isOpen", true);
-
     }
 
     private void ExitQuiz()
@@ -154,7 +132,6 @@ public class QuizManager : MonoBehaviour
         firstPersonController.cameraCanMove = true;
         quizCanvas.SetActive(false);
         resultCanvas.SetActive(false);
-        inventory.enabled = true;
     }
 
     private void TryAgain()
@@ -190,12 +167,11 @@ public class QuizManager : MonoBehaviour
         for (int i = 0; i < answerButtons.Length; i++)
         {
             Button answerButton = answerButtons[i];
-            answerButton.GetComponentInChildren<Text>().text = currentQuestion.answers[i];
+            answerButton.GetComponentInChildren<TextMeshProUGUI>().text = currentQuestion.answers[i];
 
             int index = i;
             answerButton.onClick.RemoveAllListeners();
             answerButton.onClick.AddListener(() => AnswerButtonClicked(index));
-
         }
     }
 
