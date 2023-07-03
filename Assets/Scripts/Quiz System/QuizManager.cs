@@ -141,9 +141,14 @@ public class QuizManager : MonoBehaviour
         firstPersonController.cameraCanMove = false;
         quizCanvas.SetActive(true);
         resultCanvas.SetActive(false);
-        StartQuiz();
         scoreManager.ResetScore();
+        correctAnswerCount = 0;
+        quizCompleted = false;
+        ResetQuiz(); // Reset the quiz before starting it again
+        StartQuiz();
     }
+
+
 
     private void InitializeQuestionPool()
     {
