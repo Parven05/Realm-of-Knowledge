@@ -1,44 +1,62 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DoorActivation : MonoBehaviour
 {
     [SerializeField] private GameObject doorObject;
+    [SerializeField] private Animator buttonAnimate;
     [SerializeField] private AudioSource doorOpenSfx;
     [SerializeField] private AudioSource doorCloseSfx;
-    private Animator doorAnimate;
+    [SerializeField] private AudioSource buttonClickSfx;
 
+    private Animator doorAnimate;
+    private Renderer buttonRenderer;
     private bool doorActivated = false;
+    private bool buttonClicked = false;
 
     private void Start()
     {
-        if (doorObject != null)
-            doorAnimate = doorObject.GetComponent<Animator>();
-        else
-            Debug.LogError("Door object is not assigned!");
+        buttonAnimate = GetComponent<Animator>();
+        doorAnimate = doorObject.GetComponent<Animator>();
+        buttonRenderer = GetComponent<Renderer>();
+    }
+
+    private void SetButtonClicked(bool isClicked)
+    {
+        buttonAnimate.SetBool("isClicked", isClicked);
+    }
+    private void SetButtonColor(Color color)
+    {
+        buttonRenderer.material.color = color;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("DoorActivationCube") && !doorActivated)
+        if (collision.gameObject.CompareTag("DoorActivationCube") && !doorActivated && !buttonClicked)
         {
-            
-            doorAnimate.SetBool("isOpen", true);
-            doorOpenSfx.Play();
             doorActivated = true;
+            buttonClicked = true;
 
+            buttonClickSfx.Play();
+            SetButtonColor(Color.green);
+            SetButtonClicked(true);
+            doorOpenSfx.Play();
+
+            doorAnimate.SetBool("isOpen", true);
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("DoorActivationCube") && doorActivated)
+        if (collision.gameObject.CompareTag("DoorActivationCube") && doorActivated && buttonClicked)
         {
-            doorAnimate.SetBool("isOpen", false);
-            doorCloseSfx.Play();
             doorActivated = false;
-    
+            buttonClicked = false;
+
+            SetButtonColor(Color.red);
+            SetButtonClicked(false);
+            doorCloseSfx.Play();
+
+            doorAnimate.SetBool("isOpen", false);
         }
     }
 }
