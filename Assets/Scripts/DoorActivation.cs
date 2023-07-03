@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class DoorActivation : MonoBehaviour
 {
-    public GameObject doorObject;
+    [SerializeField] private GameObject doorObject;
+    [SerializeField] private AudioSource doorOpenSfx;
+    [SerializeField] private AudioSource doorCloseSfx;
     private Animator doorAnimate;
 
     private bool doorActivated = false;
@@ -23,6 +25,7 @@ public class DoorActivation : MonoBehaviour
         {
             
             doorAnimate.SetBool("isOpen", true);
+            doorOpenSfx.Play();
             doorActivated = true;
 
         }
@@ -33,6 +36,7 @@ public class DoorActivation : MonoBehaviour
         if (collision.gameObject.CompareTag("DoorActivationCube") && doorActivated)
         {
             doorAnimate.SetBool("isOpen", false);
+            doorCloseSfx.Play();
             doorActivated = false;
     
         }

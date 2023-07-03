@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    public GameObject doorObject; // Reference to the GameObject with the Animator component
+    [SerializeField] private GameObject doorObject; // Reference to the GameObject with the Animator component
+    [SerializeField] private AudioSource doorOpenSfx;
+    [SerializeField] private AudioSource doorCloseSfx;
 
     private Animator doorAnimator;
     private bool isOpen = false;
@@ -20,6 +22,7 @@ public class DoorController : MonoBehaviour
         if (other.CompareTag("Player") && !isOpen)
         {
             doorAnimator.SetBool("isOpen", true);
+            doorOpenSfx.Play();
             isOpen = true;
         }
     }
@@ -29,6 +32,7 @@ public class DoorController : MonoBehaviour
         if (other.CompareTag("Player") && isOpen)
         {
             doorAnimator.SetBool("isOpen", false);
+            doorCloseSfx.Play();
             isOpen = false;
         }
     }
