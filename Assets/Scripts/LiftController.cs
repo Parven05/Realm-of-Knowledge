@@ -2,11 +2,16 @@ using UnityEngine;
 
 public class LiftController : MonoBehaviour
 {
-    public float liftSpeed = 1f; // Speed at which the lift moves
-    public Transform liftTop; // The transform representing the highest position the lift can reach
+    [SerializeField] private float liftSpeed = 1f;
+    [SerializeField] private float delayTime = 5f;
+    [SerializeField] private Transform liftTop;
 
-    private Vector3 initialPosition; // The initial position of the lift
-    private bool isPlayerInside; // Flag to track if the player is inside the lift
+    [SerializeField] private AudioSource liftAudioSource;
+
+    private Vector3 initialPosition;
+    private bool isPlayerInside;
+    private bool isLiftingUp;
+    private float delayTimer;
 
     private void Start()
     {
@@ -17,23 +22,50 @@ public class LiftController : MonoBehaviour
     {
         if (isPlayerInside)
         {
-            if (transform.position.y < liftTop.position.y)
+            if (isLiftingUp)
             {
-                float newY = Mathf.Lerp(transform.position.y, liftTop.position.y, liftSpeed * Time.deltaTime);
-                transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+                if (transform.position.y < liftTop.position.y)
+                {
+                    float newY = Mathf.MoveTowards(transform.position.y, liftTop.position.y, liftSpeed * Time.deltaTime);
+                    transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+                }
+                else
+                {
+                    if (delayTimer <= 0f)
+                    {
+                        isLiftingUp = false;
+                        delayTimer = delayTime;
+                        PlayLiftSound();
+                    }
+                    else
+                    {
+                        delayTimer -= Time.deltaTime;
+                    }
+                }
             }
-            else if (transform.position.y > liftTop.position.y)
+            else
             {
-                float newY = Mathf.Lerp(transform.position.y, initialPosition.y, liftSpeed * Time.deltaTime);
-                transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+                if (transform.position.y > initialPosition.y)
+                {
+                    float newY = Mathf.MoveTowards(transform.position.y, initialPosition.y, liftSpeed * Time.deltaTime);
+                    transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+                }
+                else
+                {
+                    StopLiftSound();
+                }
             }
         }
         else
         {
             if (transform.position.y > initialPosition.y)
             {
-                float newY = Mathf.Lerp(transform.position.y, initialPosition.y, liftSpeed * Time.deltaTime);
+                float newY = Mathf.MoveTowards(transform.position.y, initialPosition.y, liftSpeed * Time.deltaTime);
                 transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+            }
+            else
+            {
+                StopLiftSound();
             }
         }
     }
@@ -43,6 +75,9 @@ public class LiftController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isPlayerInside = true;
+            isLiftingUp = true;
+            delayTimer = delayTime;
+            PlayLiftSound();
         }
     }
 
@@ -51,6 +86,22 @@ public class LiftController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isPlayerInside = false;
+        }
+    }
+
+    private void PlayLiftSound()
+    {
+        if (liftAudioSource != null && isLiftingUp)
+        {
+            liftAudioSource.Play();
+        }
+    }
+
+    private void StopLiftSound()
+    {
+        if (liftAudioSource != null)
+        {
+            liftAudioSource.Stop();
         }
     }
 }
