@@ -1,60 +1,56 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.VFX;
 
 public class PickupScript : MonoBehaviour
 {
-    [SerializeField] private LayerMask PickupMask;
-    [SerializeField] private Camera PlayerCam;
-    [SerializeField] private Transform PickupTarget;
-    [Space]
-    [SerializeField] private float PickupRange;
-    private Rigidbody CurrentObject;
+    [SerializeField] private LayerMask pickupMask;
+    [SerializeField] private Camera playerCam;
+    [SerializeField] private Transform pickupTarget;
+    [SerializeField] private float pickupRange;
+    [SerializeField] private AudioSource pickupSfx;
+
+    private Rigidbody currentObject;
     private Vector3 currentVelocity;
+    private float smoothingFactor = 0.2f;
 
-    void Start()
-    {
-
-    }
-
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (CurrentObject)
+            if (currentObject)
             {
-                CurrentObject.useGravity = true;
-                CurrentObject = null;
-                return;
-
+                currentObject.useGravity = true;
+                currentObject = null;
             }
-
-            Ray CameraRay = PlayerCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-            if (Physics.Raycast(CameraRay, out RaycastHit HitInfo, PickupRange, PickupMask))
+            else
             {
-                CurrentObject = HitInfo.rigidbody;
-                CurrentObject.useGravity = false;
+                Ray cameraRay = playerCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+                if (Physics.Raycast(cameraRay, out RaycastHit hitInfo, pickupRange, pickupMask))
+                {
+                    currentObject = hitInfo.rigidbody;
+                    currentObject.useGravity = false;
+
+                    if (pickupSfx != null)
+                    {
+                        pickupSfx.Play();
+                    }
+                }
             }
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        if (CurrentObject)
+        if (currentObject)
         {
-            Vector3 DirectionToPoint = PickupTarget.position - CurrentObject.position;
-            float DistanceToPoint = DirectionToPoint.magnitude;
+            Vector3 directionToPoint = pickupTarget.position - currentObject.position;
+            float distanceToPoint = directionToPoint.magnitude;
 
-            // Calculate the target velocity using lerp
-            Vector3 targetVelocity = DirectionToPoint.normalized * 12f * DistanceToPoint;
-
-            // Apply interpolation (lerp) to smooth out the movement with damping
-            float smoothingFactor = 0.2f;
+            Vector3 targetVelocity = directionToPoint.normalized * 12f * distanceToPoint;
             currentVelocity = Vector3.Lerp(currentVelocity, targetVelocity, smoothingFactor);
 
-            // Apply the smoothed velocity
-            CurrentObject.velocity = currentVelocity;
+            currentObject.velocity = currentVelocity;
         }
     }
 }
