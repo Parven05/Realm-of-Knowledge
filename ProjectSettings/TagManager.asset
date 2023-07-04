@@ -9,6 +9,7 @@ TagManager:
   - CubeOrange
   - CubeBlue
   - CubeYellow
+  - CubePurple
   layers:
   - Default
   - TransparentFX

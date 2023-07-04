@@ -6,6 +6,10 @@ public class PuzzleDoorOpener : MonoBehaviour
     [SerializeField] private Animator doorAnimator;
     [SerializeField] private AudioSource doorOpenSfx;
 
+    [SerializeField] private CageOpener cageOpener;
+
+  
+
     private bool allCompleted = false;
 
     private void Start()
@@ -14,6 +18,8 @@ public class PuzzleDoorOpener : MonoBehaviour
         {
             completionObject.OnQuizCompleted += HandleQuizCompleted;
         }
+
+        cageOpener.enabled = false;
     }
 
     private void OnDestroy()
@@ -24,20 +30,27 @@ public class PuzzleDoorOpener : MonoBehaviour
         }
     }
 
+    private void DoorOpen()
+    {
+        doorOpenSfx.Play();
+        doorAnimator.SetBool("isOpen", true);
+    }
+
+
     private void HandleQuizCompleted()
     {
         foreach (var completionObject in completionObjects)
         {
             if (!completionObject.IsCompleted)
             {
-                return; // Not all completion objects are complete
+                return; 
             }
         }
 
         if (!allCompleted)
         {
-            doorOpenSfx.Play();
-            doorAnimator.SetBool("isOpen", true);
+            DoorOpen();
+            cageOpener.enabled = true;
             allCompleted = true;
         }
     }
