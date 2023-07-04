@@ -18,17 +18,16 @@ public class QuizActivation : MonoBehaviour
 
     private void Start()
     {
-        quizManager = FindObjectOfType<QuizManager>();
+        quizManager.enabled = false;
+        quizText.enabled = false;
+
         quizRenderer = quizScreen.GetComponent<Renderer>();
         buttonAnimate = GetComponent<Animator>();
         buttonRenderer = GetComponent<Renderer>();
 
-        if (!buttonClicked && !quizActivated)
-        {
-            quizActivated = false;
-            quizManager.enabled = false;
-            quizText.enabled = false;
-        }
+        SetButtonColor(Color.red);
+        SetButtonClicked(false);
+        SetScreenColor(Color.black);
     }
 
     private void SetButtonClicked(bool isClicked)
@@ -50,6 +49,7 @@ public class QuizActivation : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(cubeTag) && !buttonClicked && !quizActivated)
         {
+            OnButtonClick();
             buttonClicked = true;
 
             buttonClickSfx.Play();
@@ -78,5 +78,10 @@ public class QuizActivation : MonoBehaviour
             quizManager.enabled = false;
             quizText.enabled = false;
         }
+    }
+
+    private void OnButtonClick()
+    {
+        quizManager.ActivateQuizButton();
     }
 }

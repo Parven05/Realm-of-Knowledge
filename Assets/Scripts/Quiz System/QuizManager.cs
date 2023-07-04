@@ -23,7 +23,7 @@ public class QuizManager : MonoBehaviour
     private bool quizTriggered = false;
     private bool quizCompleted = false;
     private int correctAnswerCount = 0;
-
+    private bool quizButtonActivated = false;
 
 
     private void Start()
@@ -44,7 +44,7 @@ public class QuizManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && quizButtonActivated)
         {
             quizTriggered = true;
             SetCursorState(false);
@@ -124,8 +124,6 @@ public class QuizManager : MonoBehaviour
 
         int currentScore = scoreManager.GetCurrentScore();
         scoreText.text = "Score: " + currentScore;
-
-
     }
 
     private void ExitQuiz()
@@ -151,8 +149,6 @@ public class QuizManager : MonoBehaviour
         ResetQuiz(); // Reset the quiz before starting it again
         StartQuiz();
     }
-
-
 
     private void InitializeQuestionPool()
     {
@@ -192,15 +188,21 @@ public class QuizManager : MonoBehaviour
 
     private void ShuffleQuestions(List<Question> questionList)
     {
-        for (int i = 0; i < questionList.Count - 1; i++)
+        for (int i = 0; i < questionList.Count; i++)
         {
+            Question temp = questionList[i];
             int randomIndex = Random.Range(i, questionList.Count);
-            Question temp = questionList[randomIndex];
-            questionList[randomIndex] = questionList[i];
-            questionList[i] = temp;
+            questionList[i] = questionList[randomIndex];
+            questionList[randomIndex] = temp;
         }
     }
+
+    public void ActivateQuizButton()
+    {
+        quizButtonActivated = true;
+    }
 }
+
 
 [System.Serializable]
 public class Question
