@@ -25,7 +25,6 @@ public class QuizManager : MonoBehaviour
     private int correctAnswerCount = 0;
     private bool quizButtonActivated = false;
 
-
     private void Start()
     {
         quizCanvas.SetActive(false);
@@ -48,8 +47,10 @@ public class QuizManager : MonoBehaviour
         {
             quizTriggered = true;
             SetCursorState(false);
+            scoreManager.ResetScore(); // Reset the score when entering a new room
         }
     }
+
 
     private void OnTriggerExit(Collider other)
     {

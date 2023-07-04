@@ -8,10 +8,21 @@ public class ScoreManager : MonoBehaviour
 
     public TextMeshProUGUI scoreText;
     private int score = 0;
+    private int roomScoreLimit = 10; // Score limit per room
 
     public void AddScore(int points)
     {
+        if (score >= roomScoreLimit)
+        {
+            return; // Score limit reached, no additional score can be added
+        }
+
         score += points;
+        if (score > roomScoreLimit)
+        {
+            score = roomScoreLimit; // Cap the score to the room limit
+        }
+
         UpdateScoreText();
     }
 
@@ -24,6 +35,11 @@ public class ScoreManager : MonoBehaviour
     public int GetCurrentScore()
     {
         return score;
+    }
+
+    public int GetRoomScoreLimit()
+    {
+        return roomScoreLimit;
     }
 
     private void UpdateScoreText()
