@@ -7,14 +7,20 @@ public class QuizCompletionHandler : MonoBehaviour
     [SerializeField] private float targetScore;
 
     private Renderer buttonRenderer;
-
     private bool colorChanged = false;
+    private bool isCompleted = false;
+
+    public bool IsCompleted => isCompleted;
+
+    public delegate void QuizCompletedDelegate();
+    public event QuizCompletedDelegate OnQuizCompleted;
 
     private void Start()
     {
         buttonRenderer = GetComponent<Renderer>();
         scoreManager.OnScoreUpdated += HandleScoreUpdated;
     }
+
     private void SetButtonColor(Color color)
     {
         buttonRenderer.material.color = color;
@@ -35,6 +41,10 @@ public class QuizCompletionHandler : MonoBehaviour
             completedSfx.Play();
             SetButtonColor(Color.green);
             colorChanged = true;
+            isCompleted = true;
+
+            // Raise the OnQuizCompleted event when the quiz is completed
+            OnQuizCompleted?.Invoke();
         }
     }
 }
