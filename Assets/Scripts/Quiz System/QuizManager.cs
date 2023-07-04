@@ -134,6 +134,7 @@ public class QuizManager : MonoBehaviour
         firstPersonController.cameraCanMove = true;
         quizCanvas.SetActive(false);
         resultCanvas.SetActive(false);
+        ResetQuiz();
     }
 
     private void TryAgain()
