@@ -9,6 +9,7 @@ public class QuizCompletionHandler : MonoBehaviour
     private Renderer buttonRenderer;
     private bool colorChanged = false;
     private bool isCompleted = false;
+    private bool allQuestionsAnswered = false;
 
     public bool IsCompleted => isCompleted;
 
@@ -45,6 +46,19 @@ public class QuizCompletionHandler : MonoBehaviour
 
             // Raise the OnQuizCompleted event when the quiz is completed
             OnQuizCompleted?.Invoke();
+        }
+
+        // Check if all questions in the room quiz are answered correctly
+        if (scoreManager.GetCurrentScore() >= scoreManager.GetRoomScoreLimit())
+        {
+            allQuestionsAnswered = true;
+        }
+
+        // Change the button color to green if all questions in the room quiz are answered correctly
+        if (allQuestionsAnswered && !colorChanged)
+        {
+            SetButtonColor(Color.green);
+            colorChanged = true;
         }
     }
 }
