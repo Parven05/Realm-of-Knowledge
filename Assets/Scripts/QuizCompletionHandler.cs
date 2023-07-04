@@ -4,12 +4,11 @@ public class QuizCompletionHandler : MonoBehaviour
 {
     [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private AudioSource completedSfx;
-    [SerializeField] private float targetScore;
+    [SerializeField] private int targetScore;
 
     private Renderer buttonRenderer;
     private bool colorChanged = false;
     private bool isCompleted = false;
-    private bool allQuestionsAnswered = false;
 
     public bool IsCompleted => isCompleted;
 
@@ -37,7 +36,7 @@ public class QuizCompletionHandler : MonoBehaviour
 
     private void HandleScoreUpdated(int currentScore)
     {
-        if (currentScore >= targetScore && !colorChanged)
+        if (currentScore >= targetScore && !colorChanged && gameObject.CompareTag("Room1"))
         {
             completedSfx.Play();
             SetButtonColor(Color.green);
@@ -47,18 +46,6 @@ public class QuizCompletionHandler : MonoBehaviour
             // Raise the OnQuizCompleted event when the quiz is completed
             OnQuizCompleted?.Invoke();
         }
-
-        // Check if all questions in the room quiz are answered correctly
-        if (scoreManager.GetCurrentScore() >= scoreManager.GetRoomScoreLimit())
-        {
-            allQuestionsAnswered = true;
-        }
-
-        // Change the button color to green if all questions in the room quiz are answered correctly
-        if (allQuestionsAnswered && !colorChanged)
-        {
-            SetButtonColor(Color.green);
-            colorChanged = true;
-        }
     }
+
 }

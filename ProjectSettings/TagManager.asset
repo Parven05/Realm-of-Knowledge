@@ -10,6 +10,9 @@ TagManager:
   - CubeBlue
   - CubeYellow
   - CubePurple
+  - Room1
+  - Room2
+  - Room3
   layers:
   - Default
   - TransparentFX
