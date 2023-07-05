@@ -115,6 +115,11 @@ public class QuizManager : MonoBehaviour
         }
     }
 
+    public bool TotalQuizCompleted()
+    {
+        return quizCompleted;
+    }    
+
     private void QuizCompleted()
     {
         Time.timeScale = 0f;
