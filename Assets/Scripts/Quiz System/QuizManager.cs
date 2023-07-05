@@ -17,6 +17,7 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private Question[] questions;
     [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private FirstPersonController firstPersonController;
+    [SerializeField] private QuizCompletionHandler quizCompletionHandlers;
 
     private List<Question> questionPool = new List<Question>();
     private Queue<Question> currentQuestionSet = new Queue<Question>();
@@ -125,6 +126,11 @@ public class QuizManager : MonoBehaviour
 
         int currentScore = scoreManager.GetCurrentScore();
         scoreText.text = "Score: " + currentScore;
+        
+        if (currentScore <= scoreManager.GetRoomScoreLimit())
+        {
+            quizCompletionHandlers.QuizCompletion();
+        }
     }
 
     private void ExitQuiz()
