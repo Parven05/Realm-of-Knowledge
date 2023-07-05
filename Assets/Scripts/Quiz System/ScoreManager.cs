@@ -6,7 +6,8 @@ public class ScoreManager : MonoBehaviour
 {
     public event System.Action<int> OnScoreUpdated;
 
-    public TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] Canvas scoreCanvas;
     private int score = 0;
     private int roomScoreLimit = 10; // Score limit per room
 
@@ -46,5 +47,15 @@ public class ScoreManager : MonoBehaviour
     {
         scoreText.text = "Score: " + score.ToString();
         OnScoreUpdated?.Invoke(GetCurrentScore());
+    }
+
+    public void EnableScoreCanvas()
+    {
+        scoreCanvas.enabled = true;
+    }
+
+    public void DisableScoreCanvas()
+    {
+        scoreCanvas.enabled = false;
     }
 }

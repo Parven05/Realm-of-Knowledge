@@ -28,6 +28,7 @@ public class QuizManager : MonoBehaviour
 
     private void Start()
     {
+        scoreManager.DisableScoreCanvas();
         quizCanvas.SetActive(false);
         resultCanvas.SetActive(false);
         SetCursorState(false);
@@ -73,6 +74,7 @@ public class QuizManager : MonoBehaviour
             firstPersonController.cameraCanMove = false;
             quizCanvas.SetActive(true);
             StartQuiz();
+            scoreManager.EnableScoreCanvas();
         }
     }
 
@@ -120,6 +122,7 @@ public class QuizManager : MonoBehaviour
         firstPersonController.cameraCanMove = false;
         quizCanvas.SetActive(false);
         resultCanvas.SetActive(true);
+        scoreManager.EnableScoreCanvas();
 
         string resultMessage = $"{correctAnswerCount} out of 5 answers are correct!";
         resultText.text = resultMessage;
@@ -142,6 +145,7 @@ public class QuizManager : MonoBehaviour
         quizCanvas.SetActive(false);
         resultCanvas.SetActive(false);
         ResetQuiz();
+        scoreManager.DisableScoreCanvas();
     }
 
     private void TryAgain()
@@ -156,6 +160,7 @@ public class QuizManager : MonoBehaviour
         quizCompleted = false;
         ResetQuiz(); // Reset the quiz before starting it again
         StartQuiz();
+        scoreManager.EnableScoreCanvas();
     }
 
     private void InitializeQuestionPool()
