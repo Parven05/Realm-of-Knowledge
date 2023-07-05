@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public AudioSource introSoundEffect;
-    public float introDelay = 2f;
+    [SerializeField] private AudioSource introSoundEffect;
+    [SerializeField] float introDelay = 2f;
 
     private bool isIntroPlayed = false;
 
