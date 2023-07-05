@@ -6,7 +6,6 @@ public class PuzzleDoorOpener : MonoBehaviour
     [SerializeField] private Animator doorAnimator;
     [SerializeField] private GameObject doorTrigger;
     [SerializeField] private AudioSource doorOpenSfx;
-    [SerializeField] private GameObject purpleCube;
 
     private bool allCompleted = false;
 
@@ -19,7 +18,6 @@ public class PuzzleDoorOpener : MonoBehaviour
 
         doorTrigger.SetActive(false);
         doorAnimator.SetBool("isOpen", false); // Ensure the door starts closed
-        purpleCube.layer = LayerMask.NameToLayer("Default"); // Set the cube's initial layer
     }
 
     private void OnDestroy()
@@ -37,11 +35,6 @@ public class PuzzleDoorOpener : MonoBehaviour
         doorAnimator.SetBool("isOpen", true);
     }
 
-    private void CubeEnabled()
-    {
-        purpleCube.layer = LayerMask.NameToLayer("pickup"); // Change the cube's layer to allow pickup
-    }
-
     private void HandleQuizCompleted()
     {
         foreach (var completionObject in completionObjects)
@@ -55,7 +48,6 @@ public class PuzzleDoorOpener : MonoBehaviour
         if (!allCompleted)
         {
             DoorOpen();
-            CubeEnabled();
             allCompleted = true;
         }
     }

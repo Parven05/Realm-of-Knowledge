@@ -130,7 +130,7 @@ public class QuizManager : MonoBehaviour
         int currentScore = scoreManager.GetCurrentScore();
         scoreText.text = "Score: " + currentScore;
         
-        if (currentScore <= scoreManager.GetRoomScoreLimit())
+        if (currentScore == scoreManager.GetRoomScoreLimit())
         {
             quizCompletionHandlers.QuizCompletion();
         }
