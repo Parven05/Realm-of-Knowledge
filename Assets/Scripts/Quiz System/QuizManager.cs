@@ -16,7 +16,7 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private Question[] questions;
     [SerializeField] private ScoreManager scoreManager;
-    [SerializeField] private FirstPersonController firstPersonController;
+    [SerializeField] private FirstPersonController player;
     [SerializeField] private QuizCompletionHandler quizCompletionHandlers;
 
     private List<Question> questionPool = new List<Question>();
@@ -71,7 +71,7 @@ public class QuizManager : MonoBehaviour
         {
             SetCursorState(true);
             Time.timeScale = 0f;
-            firstPersonController.cameraCanMove = false;
+            player.cameraCanMove = false;
             quizCanvas.SetActive(true);
             StartQuiz();
             scoreManager.EnableScoreCanvas();
@@ -119,7 +119,7 @@ public class QuizManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         quizCompleted = true;
-        firstPersonController.cameraCanMove = false;
+        player.cameraCanMove = false;
         quizCanvas.SetActive(false);
         resultCanvas.SetActive(true);
         scoreManager.EnableScoreCanvas();
@@ -141,7 +141,7 @@ public class QuizManager : MonoBehaviour
         SetCursorState(false);
         quizCompleted = false;
         Time.timeScale = 1f;
-        firstPersonController.cameraCanMove = true;
+        player.cameraCanMove = true;
         quizCanvas.SetActive(false);
         resultCanvas.SetActive(false);
         ResetQuiz();
@@ -152,7 +152,7 @@ public class QuizManager : MonoBehaviour
     {
         SetCursorState(true);
         Time.timeScale = 0f;
-        firstPersonController.cameraCanMove = false;
+        player.cameraCanMove = false;
         quizCanvas.SetActive(true);
         resultCanvas.SetActive(false);
         scoreManager.ResetScore();
