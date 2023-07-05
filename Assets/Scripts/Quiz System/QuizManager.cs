@@ -17,6 +17,7 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private Question[] questions;
     [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private FirstPersonController player;
+    [SerializeField] private bool quizCompletion;
     [SerializeField] private QuizCompletionHandler quizCompletionHandlers;
 
     private List<Question> questionPool = new List<Question>();
@@ -118,7 +119,7 @@ public class QuizManager : MonoBehaviour
     public bool TotalQuizCompleted()
     {
         return quizCompleted;
-    }    
+    }
 
     private void QuizCompleted()
     {
@@ -134,12 +135,16 @@ public class QuizManager : MonoBehaviour
 
         int currentScore = scoreManager.GetCurrentScore();
         scoreText.text = "Score: " + currentScore;
-        
-        if (currentScore == scoreManager.GetRoomScoreLimit())
+
+        if (currentScore == scoreManager.GetRoomScoreLimit() && quizCompletion)
         {
-            quizCompletionHandlers.QuizCompletion();
+            if (quizCompletionHandlers != null) // Check if quizCompletionHandlers is not null before invoking the method
+            {
+                quizCompletionHandlers.QuizCompletion();
+            }
         }
     }
+
 
     private void ExitQuiz()
     {
