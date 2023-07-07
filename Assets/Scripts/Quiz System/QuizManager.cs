@@ -144,6 +144,7 @@ public class QuizManager : MonoBehaviour
             }
         }
     }
+
     private void ExitQuiz()
     {
         SetCursorState(false);
