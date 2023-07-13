@@ -18,6 +18,10 @@ public class RiddleActivation : MonoBehaviour
         buttonAnimate.SetBool("isClicked", false);
         
     }
+    public bool ButtonClicked
+    {
+        get { return buttonClicked; }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag(cubeTag) && !buttonClicked)
