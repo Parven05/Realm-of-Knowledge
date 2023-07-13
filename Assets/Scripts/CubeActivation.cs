@@ -5,7 +5,8 @@ using UnityEngine;
 public class CubeActivation : MonoBehaviour
 {
     [SerializeField] private GameObject cubeObject;
-    [SerializeField] private string newCubeTag; 
+    [SerializeField] private string newCubeTag;
+    [SerializeField] private Color newColor;
 
     private Renderer cubeRenderer;
     private bool cubeActivated = false;
@@ -22,11 +23,11 @@ public class CubeActivation : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!cubeActivated)
+        if (other.CompareTag("Player") && !cubeActivated)
         {
             cubeActivated = true;
             cubeObject.tag = newCubeTag; 
-            SetCubeColor(Color.black);
+            SetCubeColor(newColor);
         }
     }
 }
