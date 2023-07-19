@@ -4,7 +4,7 @@
 ![License](https://badgen.net/badge/license/MIT/green)
 
 # **Final Year Project 2023 (Game - Unity Engine)**
-![Banner](https://user-images.githubusercontent.com/101796812/246610493-1a4783d3-3aa2-4878-a052-423a4b331307.png)
+![Banner](https://user-images.githubusercontent.com/101796812/254477980-6a75f821-3def-4b2a-84e5-c30855070f72.png)
 
 ## **Introduction:**
 Welcome to "Realm of Knowledge," a captivating 3D first-person quiz-based puzzle game. In this immersive game world, players delve into the realm of programming languages through engaging quizzes. As the main mechanic, players can pick up cubes strategically to solve puzzles that lead them closer to answering quiz questions.
