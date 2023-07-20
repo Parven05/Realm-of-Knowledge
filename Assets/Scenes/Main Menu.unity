@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startButton: {fileID: 1393083723}
   quitButton: {fileID: 587267556}
+  buttonClick: {fileID: 1976792517}
 --- !u!4 &275429026
 Transform:
   m_ObjectHideFlags: 0
