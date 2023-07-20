@@ -11,7 +11,6 @@ public class EndingCutscene : MonoBehaviour
     [SerializeField] private float delayBeforeLogoAnimation = 2.0f;
 
     [SerializeField] private FootSteps playerFootsteps;
-    [SerializeField] private FirstPersonController playerMovement;
     [SerializeField] private GameObject playerCursor;
 
     private Animator logoAnim;
@@ -44,7 +43,6 @@ public class EndingCutscene : MonoBehaviour
         panelAnim.SetBool("isFade", true);
         playerCursor.SetActive(false);
         playerFootsteps.enabled = false;
-        playerMovement.enabled = false;
 
         yield return new WaitForSeconds(delayBeforeLogoAnimation);
 
