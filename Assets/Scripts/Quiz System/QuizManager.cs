@@ -3,7 +3,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
 public class QuizManager : MonoBehaviour
 {
     [SerializeField] private GameObject quizCanvas;
