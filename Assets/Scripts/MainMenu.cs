@@ -13,6 +13,10 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] private AudioSource buttonClick;
 
+    [Header("Loading Screen")]
+    public GameObject loadingScreen;
+    public Slider loadingSlider;
+
     private Animator panelAnim;
 
     private void Start()
@@ -22,11 +26,11 @@ public class MainMenu : MonoBehaviour
         startButton.onClick.AddListener(LoadScene);
         quitButton.onClick.AddListener(QuitGame);
     }
+
     void PlayPanelAnimation()
     {
         panel.SetActive(true);
         panelAnim.SetBool("isFade", true);
-        
     }
 
     void LoadScene()
@@ -59,8 +63,19 @@ public class MainMenu : MonoBehaviour
             yield return null;
         }
 
-       
-        SceneManager.LoadScene("Game");
+        // Show the loading screen
+        loadingScreen.SetActive(true);
+
+        // Begin loading the scene asynchronously
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Game");
+
+        // Update the loading progress
+        while (!asyncOperation.isDone)
+        {
+            float progress = Mathf.Clamp01(asyncOperation.progress / 0.9f); // The progress goes from 0 to 0.9, so we normalize it to 0 to 1
+            loadingSlider.value = progress;
+            yield return null;
+        }
     }
 
     private IEnumerator FadeOutMusicAndQuitApplication()
@@ -75,7 +90,7 @@ public class MainMenu : MonoBehaviour
             yield return null;
         }
 
-        
+        // Quit the application
         Application.Quit();
     }
 
@@ -92,7 +107,7 @@ public class MainMenu : MonoBehaviour
             yield return null;
         }
 
-       
+        // Quit the editor
         UnityEditor.EditorApplication.isPlaying = false;
     }
 #endif
