@@ -9,6 +9,7 @@ public class EndingCutscene : MonoBehaviour
     [SerializeField] private AudioSource endBGM;
     [SerializeField] private float delayBeforePanelAnimation = 2.0f;
     [SerializeField] private float delayBeforeLogoAnimation = 2.0f;
+    [SerializeField] private float delayBeforeLogoFadeAnimation = 2.0f;
 
     [SerializeField] private FootSteps playerFootsteps;
     [SerializeField] private GameObject playerCursor;
@@ -47,7 +48,11 @@ public class EndingCutscene : MonoBehaviour
         yield return new WaitForSeconds(delayBeforeLogoAnimation);
 
         logoAnim.SetBool("isFade", true);
-  
+
+        yield return new WaitForSeconds(delayBeforeLogoFadeAnimation);
+
+        logoAnim.SetBool("isUp", true);
+
         hasPlayed = true;
     }
 }
