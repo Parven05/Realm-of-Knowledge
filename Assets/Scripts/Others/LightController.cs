@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class LightController : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class LightController : MonoBehaviour
         }
     }
 
-    private System.Collections.IEnumerator ActivateLightsWithDelay()
+    private IEnumerator ActivateLightsWithDelay()
     {
         for (int i = 0; i < lightsToActivate.Length; i++)
         {
