@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class EndingCutscene : MonoBehaviour
 {
     [SerializeField] private GameObject logoImage;
     [SerializeField] private GameObject panel;
+    [SerializeField] private Button mainMenuButton;
     [SerializeField] private AudioSource endBGM;
+    [SerializeField] private AudioSource buttonClick;
     [SerializeField] private float delayBeforePanelAnimation = 2.0f;
     [SerializeField] private float delayBeforeLogoAnimation = 2.0f;
     [SerializeField] private float delayBeforeLogoFadeAnimation = 2.0f;
+    [SerializeField] private float buttonDelay = 2.0f;
 
     [SerializeField] private FootSteps playerFootsteps;
     [SerializeField] private GameObject playerCursor;
@@ -24,6 +29,15 @@ public class EndingCutscene : MonoBehaviour
     {
         logoAnim = logoImage.GetComponent<Animator>();
         panelAnim = panel.GetComponent<Animator>();
+
+        mainMenuButton.onClick.AddListener(BackToMainMenu);
+        mainMenuButton.gameObject.SetActive(false);
+    }
+
+    void BackToMainMenu()
+    {
+        buttonClick.Play();
+        SceneManager.LoadScene("Main Menu");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,6 +46,12 @@ public class EndingCutscene : MonoBehaviour
         {
             StartCoroutine(PlayAnimationWithDelay());
         }
+    }
+
+    private void SetCursorState(bool enabled)
+    {
+        Cursor.visible = enabled;
+        Cursor.lockState = enabled ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
     private IEnumerator PlayAnimationWithDelay()
@@ -52,6 +72,11 @@ public class EndingCutscene : MonoBehaviour
         yield return new WaitForSeconds(delayBeforeLogoFadeAnimation);
 
         logoAnim.SetBool("isUp", true);
+
+        yield return new WaitForSeconds(buttonDelay);
+
+        mainMenuButton.gameObject.SetActive(true);
+        SetCursorState(true);
 
         hasPlayed = true;
     }
