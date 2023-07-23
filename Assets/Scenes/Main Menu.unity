@@ -1661,10 +1661,10 @@ MonoBehaviour:
   lightsToActivate: {fileID: 8205678503633671756}
   emissionMaterials: {fileID: 2100000, guid: 7dac60a12f15c5749bcf328684cfc1ec, type: 2}
   lightOnSfx: {fileID: 4029193836482437252}
-  activationDelay: 0.5
+  activationDelay: 1
   flickerCount: 3
   flickerInterval: 0.5
-  screenDelay: 2
+  screenDelay: 1.5
   quizScreen: {fileID: 2697993232555556832}
   screenOnSfx: {fileID: 2743000434171116797}
 --- !u!4 &981701039
