@@ -20,8 +20,25 @@ public class BackToMenu : MonoBehaviour
     [SerializeField] private GameObject footstepsSFX;
     [SerializeField] private GameObject jumpSfx;
 
+    [Header("Loading Screen")]
+    [SerializeField] private GameObject loadingScreen;
+    [SerializeField] private Slider loadingSlider;
+
     private bool hasTriggered;
 
+    private IEnumerator LoadingScreentoMenu()
+    {
+        loadingScreen.SetActive(true);
+
+       AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Main Menu");
+
+        while (!asyncOperation.isDone)
+        {
+            float progress = Mathf.Clamp01(asyncOperation.progress / 0.9f);
+            loadingSlider.value = progress;
+            yield return null;
+        }
+    }
 
     void PlayerInteraction (bool enabled)
     {
@@ -51,7 +68,8 @@ public class BackToMenu : MonoBehaviour
     void BackToMainMenu()
     {
         buttonClickedSFX.Play();
-        SceneManager.LoadScene("Main Menu");
+        Time.timeScale = 1f;
+        StartCoroutine(LoadingScreentoMenu());
     }
 
     void Resume()
