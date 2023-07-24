@@ -23,6 +23,7 @@ public class QuizManager : MonoBehaviour
 
     [Header("Dependencies")]
     [SerializeField] private FirstPersonController player;
+    [SerializeField] private BackToMenu pauseMenu;
 
     [SerializeField] private QuizCompletionHandler quizCompletionHandlers;
     [SerializeField] private bool quizCompletion;
@@ -76,6 +77,7 @@ public class QuizManager : MonoBehaviour
     {
         if (quizTriggered && !quizCompleted && Input.GetKeyDown(KeyCode.E))
         {
+            pauseMenu.enabled = false;
             SetCursorState(true);
             Time.timeScale = 0f;
             player.cameraCanMove = false;
@@ -161,6 +163,7 @@ public class QuizManager : MonoBehaviour
         resultCanvas.SetActive(false);
         ResetQuiz();
         scoreManager.DisableScoreCanvas();
+        pauseMenu.enabled = true;
     }
 
     private void TryAgain()
