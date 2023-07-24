@@ -22,7 +22,8 @@ public class EndingCutscene : MonoBehaviour
     [SerializeField] private float buttonDelay = 2.0f;
 
     [Header("Player")]
-    [SerializeField] private FootSteps playerFootsteps;
+    [SerializeField] private GameObject footstepsSFX;
+    [SerializeField] private GameObject jumpSFX;
     [SerializeField] private GameObject playerCursor;
 
     private Animator logoAnim;
@@ -60,6 +61,13 @@ public class EndingCutscene : MonoBehaviour
         Cursor.lockState = enabled ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
+    void PlayerInteraction(bool enabled)
+    {
+        playerCursor.SetActive(enabled);
+        footstepsSFX.SetActive(enabled);
+        jumpSFX.SetActive(enabled);
+    }
+
     private IEnumerator PlayAnimationWithDelay()
     {
         hasTransitioned = true;
@@ -68,8 +76,8 @@ public class EndingCutscene : MonoBehaviour
 
         endBGM.Play();
         panelAnim.SetBool("isFade", true);
-        playerCursor.SetActive(false);
-        playerFootsteps.enabled = false;
+        PlayerInteraction(false);
+        
 
         yield return new WaitForSeconds(delayBeforeLogoAnimation);
 
