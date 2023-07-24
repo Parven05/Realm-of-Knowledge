@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class AutoDoorController : MonoBehaviour
 {
+    [Header("Door")]
     [SerializeField] private GameObject doorObject; 
     [SerializeField] private AudioSource doorOpenSfx;
     [SerializeField] private AudioSource doorCloseSfx;
+
+    [Header("Delay for DoorOpen")]
     [SerializeField] private float doorOpenDelay = 5f; 
 
     private Animator doorAnimator;

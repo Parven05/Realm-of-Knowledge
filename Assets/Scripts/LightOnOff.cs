@@ -3,12 +3,17 @@ using UnityEngine;
 
 public class LightOnOff : MonoBehaviour
 {
+    [Header("Light Flickering")]
     [SerializeField] private GameObject lightsToActivate;
     [SerializeField] private Material emissionMaterials;
     [SerializeField] private AudioSource lightOnSfx;
+
+    [Header("Flicker Delay")]
     [SerializeField] private float activationDelay = 0.5f;
-    [SerializeField] private int flickerCount = 5; // Number of flickers
+    [SerializeField] private int flickerCount = 5;
     [SerializeField] private float flickerInterval = 0.2f;
+
+    [Header("Computer Screen On")]
     [SerializeField] private float screenDelay = 0.2f;
     [SerializeField] private GameObject quizScreen;
     [SerializeField] private AudioSource screenOnSfx;

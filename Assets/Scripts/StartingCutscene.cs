@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class StartingCutscene : MonoBehaviour
 {
+    [Header("Intro Scene")]
     [SerializeField] private GameObject panel;
     [SerializeField] private GameObject loadingText;
     [SerializeField] private GameObject quoteText;
 
+    [Header("Delay in Intro Scene")]
     [SerializeField] private float panelDelay = 1f;
     [SerializeField] private int loadingLoopCount = 3;
     [SerializeField] private float loadingDelay = 1.5f;
     [SerializeField] private float quoteDelay = 2.0f;
 
+    [Header("Player")]
     [SerializeField] private FootSteps playerFootsteps;
     [SerializeField] private FirstPersonController playerMovement;
     [SerializeField] private GameObject playerCursor;

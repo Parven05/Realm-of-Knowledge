@@ -6,16 +6,22 @@ using UnityEngine.UI;
 
 public class EndingCutscene : MonoBehaviour
 {
+    [Header("Ending Scene")]
     [SerializeField] private GameObject logoImage;
     [SerializeField] private GameObject panel;
     [SerializeField] private Button mainMenuButton;
+
+    [Header("Ending BGM & Sound Effect")]
     [SerializeField] private AudioSource endBGM;
     [SerializeField] private AudioSource buttonClick;
+
+    [Header("Delay in ending scene")]
     [SerializeField] private float delayBeforePanelAnimation = 2.0f;
     [SerializeField] private float delayBeforeLogoAnimation = 2.0f;
     [SerializeField] private float delayBeforeLogoFadeAnimation = 2.0f;
     [SerializeField] private float buttonDelay = 2.0f;
 
+    [Header("Player")]
     [SerializeField] private FootSteps playerFootsteps;
     [SerializeField] private GameObject playerCursor;
 

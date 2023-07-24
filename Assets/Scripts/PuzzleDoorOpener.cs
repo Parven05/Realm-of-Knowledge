@@ -2,11 +2,14 @@ using UnityEngine;
 
 public class PuzzleDoorOpener : MonoBehaviour
 {
-    [SerializeField] private QuizCompletionHandler[] completionObjects;
+    [Header("Door")]
     [SerializeField] private Animator doorAnimator;
     [SerializeField] private GameObject doorTrigger;
     [SerializeField] private AudioSource doorOpenSfx;
 
+    [Header("Required Object")]
+    [SerializeField] private QuizCompletionHandler[] completionObjects;
+   
     private bool allCompleted = false;
 
     private void Start()

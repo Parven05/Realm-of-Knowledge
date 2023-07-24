@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class RiddleActivation : MonoBehaviour
 {
-    [SerializeField] private string cubeTag;
+    [Header("Button")]
     [SerializeField] private Animator buttonAnimate;
     [SerializeField] private AudioSource buttonClickSfx;
+
+    [Header("Required Cube")]
+    [SerializeField] private string cubeTag;
 
     private Renderer buttonRenderer;
     private bool buttonClicked = false;

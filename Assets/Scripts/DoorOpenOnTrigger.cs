@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DoorOpenOnTrigger : MonoBehaviour
 {
+    [Header("Door")]
     [SerializeField] private Animator doorAnimator;
     [SerializeField] private GameObject doorTrigger;
     [SerializeField] private AudioSource doorOpenSfx;

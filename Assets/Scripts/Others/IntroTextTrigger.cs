@@ -5,9 +5,12 @@ using TMPro;
 
 public class IntroTextTrigger : MonoBehaviour
 {
-    [SerializeField] Canvas introTextCanvas;
-    [SerializeField] float textDelay;
+    [Header("IntroText Canvas")]
+    [SerializeField] Canvas introTextCanvas; 
     [SerializeField] TextMeshProUGUI introText;
+
+    [Header("Delay for Text")]
+    [SerializeField] float textDelay;
 
     private Animator introTextAnim;
 

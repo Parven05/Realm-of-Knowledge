@@ -3,9 +3,12 @@ using System.Collections;
 
 public class LightController : MonoBehaviour
 {
+    [Header("Light Activation")]
     [SerializeField] private GameObject[] lightsToActivate;
     [SerializeField] private Material[] emissionMaterials; 
     [SerializeField] private AudioSource lightOnSfx;
+
+    [Header("Light Activation Delay")]
     [SerializeField] private float activationDelay = 0.5f;
 
     private bool hasInteracted = false;

@@ -5,14 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [Header("Menu Items")]
     [SerializeField] private Button startButton;
     [SerializeField] private Button quitButton;
+
+    [Header("Menu Music & Sound Effects")]
     [SerializeField] private AudioSource menuBGM;
-    [SerializeField] private GameObject panel;
+    [SerializeField] private AudioSource buttonClick;
     [SerializeField] private float musicFadeDuration = 1.5f;
 
-    [SerializeField] private AudioSource buttonClick;
-
+    [Header("Animation After Clicked Buttons")]
+    [SerializeField] private GameObject panel;
+    
     [Header("Loading Screen")]
     public GameObject loadingScreen;
     public Slider loadingSlider;

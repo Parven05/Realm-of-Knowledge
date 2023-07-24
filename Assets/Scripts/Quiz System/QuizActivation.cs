@@ -3,13 +3,22 @@ using TMPro;
 
 public class QuizActivation : MonoBehaviour
 {
+    [Header("Button")]
     [SerializeField] private Animator buttonAnimate;
     [SerializeField] private AudioSource buttonClickSfx;
-    [SerializeField] private QuizManager quizManager;
-    [SerializeField] private TextMeshProUGUI quizText;
+
+    [Header("Computer Screen On")]
     [SerializeField] private GameObject quizScreen;
     [SerializeField] private AudioSource screenOnSfx;
-    [SerializeField] private string cubeTag; // New serialized field for the cube tag
+
+    [Header("Enter e Text")]
+    [SerializeField] private TextMeshProUGUI quizText;
+
+    [Header("Required Cube")]
+    [SerializeField] private string cubeTag;
+
+    [Header("Dependencies")]
+    [SerializeField] private QuizManager quizManager;
 
     private Renderer buttonRenderer;
     private Renderer quizRenderer;

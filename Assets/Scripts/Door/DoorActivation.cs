@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class DoorActivation : MonoBehaviour
 {
+    [Header("Door")]
     [SerializeField] private GameObject doorObject;
-    [SerializeField] private Animator buttonAnimate;
     [SerializeField] private AudioSource doorOpenSfx;
     [SerializeField] private AudioSource doorCloseSfx;
+
+    [Header("Button")]
+    [SerializeField] private Animator buttonAnimate;  
     [SerializeField] private AudioSource buttonClickSfx;
 
     private Animator doorAnimate;

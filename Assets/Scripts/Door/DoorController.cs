@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    [SerializeField] private GameObject doorObject; // Reference to the GameObject with the Animator component
+    [Header("Door")]
+    [SerializeField] private GameObject doorObject;
     [SerializeField] private AudioSource doorOpenSfx;
     [SerializeField] private AudioSource doorCloseSfx;
 

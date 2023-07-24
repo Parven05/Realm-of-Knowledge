@@ -2,11 +2,17 @@ using UnityEngine;
 
 public class LiftControllerUp : MonoBehaviour
 {
+    [Header("Lift Speed")]
     [SerializeField] private float liftSpeed = 1f;
-    [SerializeField] private float delayTime = 5f;
-    [SerializeField] private Transform liftTop;
 
+    [Header("Lift Delay")]
+    [SerializeField] private float delayTime = 5f;
+
+    [Header("Lift Sound Effect")]
     [SerializeField] private AudioSource liftAudioSource;
+
+    [Header("Dependeny")]
+    [SerializeField] private Transform liftTop;
 
     private Vector3 initialPosition;
     private bool isPlayerInside;

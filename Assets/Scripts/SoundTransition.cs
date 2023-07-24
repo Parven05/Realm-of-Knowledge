@@ -3,8 +3,11 @@ using System.Collections;
 
 public class SoundTransition : MonoBehaviour
 {
+    [Header("Background Music")]
     [SerializeField] private AudioSource previousBGMSource;
     [SerializeField] private AudioSource newBGMSource;
+
+    [Header("Fade In / Fade Out Duration")]
     [SerializeField] private float fadeOutDuration = 2.0f;
     [SerializeField] private float fadeInDuration = 2.0f;
 

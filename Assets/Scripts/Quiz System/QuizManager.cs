@@ -5,19 +5,27 @@ using UnityEngine.UI;
 using TMPro;
 public class QuizManager : MonoBehaviour
 {
+    [Header("Quiz Canvas")]
     [SerializeField] private GameObject quizCanvas;
-    [SerializeField] private GameObject resultCanvas;
     [SerializeField] private TextMeshProUGUI questionText;
+    [SerializeField] private Button[] answerButtons;
+    [SerializeField] private Question[] questions;
+
+    [Header("Result Canvas")]
+    [SerializeField] private GameObject resultCanvas;
+    [SerializeField] private TextMeshProUGUI resultText;
     [SerializeField] private Button tryAgainButton;
     [SerializeField] private Button exitButton;
-    [SerializeField] private Button[] answerButtons;
-    [SerializeField] private TextMeshProUGUI resultText;
+
+    [Header("Score Canvas")]
     [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private Question[] questions;
     [SerializeField] private ScoreManager scoreManager;
+
+    [Header("Dependencies")]
     [SerializeField] private FirstPersonController player;
-    [SerializeField] private bool quizCompletion;
+
     [SerializeField] private QuizCompletionHandler quizCompletionHandlers;
+    [SerializeField] private bool quizCompletion;
 
     private List<Question> questionPool = new List<Question>();
     private Queue<Question> currentQuestionSet = new Queue<Question>();

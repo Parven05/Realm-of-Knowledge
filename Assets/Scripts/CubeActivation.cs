@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CubeActivation : MonoBehaviour
 {
+    [Header("Required Cube")]
     [SerializeField] private GameObject cubeObject;
     [SerializeField] private string newCubeTag;
     [SerializeField] private Color newColor;
