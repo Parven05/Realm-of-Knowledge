@@ -7,7 +7,9 @@ public class MainMenu : MonoBehaviour
 {
     [Header("Menu Items")]
     [SerializeField] private Button startButton;
+    [SerializeField] private Button creditButton;
     [SerializeField] private Button quitButton;
+    [SerializeField] private Button backButton;
 
     [Header("Menu Music & Sound Effects")]
     [SerializeField] private AudioSource menuBGM;
@@ -16,25 +18,64 @@ public class MainMenu : MonoBehaviour
 
     [Header("Animation After Clicked Buttons")]
     [SerializeField] private GameObject panel;
+    [SerializeField] private GameObject mainCamera;
     
     [Header("Loading Screen")]
     public GameObject loadingScreen;
     public Slider loadingSlider;
 
+    [Header("Light Activation")]
+    [SerializeField] private GameObject lightsToActivate;
+    [SerializeField] private Material emissionMaterials;
+    [SerializeField] private AudioSource lightOnSfx;
+    [SerializeField] private float activationDelay;
+
+    [Header("Canvas")]
+    [SerializeField] private GameObject menuCanvas;
+    [SerializeField] private GameObject creditCanvas;
+
     private Animator panelAnim;
+    private Animator mainCameraAnim;
 
     private void Start()
     {
+        lightsToActivate.SetActive(false);
+        emissionMaterials.DisableKeyword("_EMISSION");
+
         panel.SetActive(false);
+        creditCanvas.SetActive(false);
+
         panelAnim = panel.GetComponent<Animator>();
+        mainCameraAnim = mainCamera.GetComponent<Animator>();
+
         startButton.onClick.AddListener(LoadScene);
+        creditButton.onClick.AddListener(LoadToCredit);
         quitButton.onClick.AddListener(QuitGame);
+        backButton.onClick.AddListener(LoadToMenu);
     }
 
     void PlayPanelAnimation()
     {
         panel.SetActive(true);
         panelAnim.SetBool("isFade", true);
+    }
+
+    void LoadToMenu()
+    {
+        buttonClick.Play();
+        creditCanvas.SetActive(false);
+        LightOffCredit();
+        mainCameraAnim.SetBool("isRight", false);
+        menuCanvas.SetActive(true);
+    }
+
+    void LoadToCredit()
+    {
+        buttonClick.Play();
+        menuCanvas.SetActive(false);
+        mainCameraAnim.SetBool("isRight", true);
+        creditCanvas.SetActive(true);
+        StartCoroutine(LightOnCredit());
     }
 
     void LoadScene()
@@ -53,6 +94,21 @@ public class MainMenu : MonoBehaviour
         buttonClick.Play();
         StartCoroutine(FadeOutMusicAndQuitApplication());
 #endif
+    }
+
+    private IEnumerator LightOnCredit()
+    {
+        yield return new WaitForSeconds(activationDelay);
+        lightOnSfx.Play();
+        lightsToActivate.SetActive(true);
+        emissionMaterials.EnableKeyword("_EMISSION");
+    }
+
+   void LightOffCredit()
+    {
+        //lightOnSfx.Play();
+        lightsToActivate.SetActive(false);
+        emissionMaterials.DisableKeyword("_EMISSION");
     }
 
     private IEnumerator FadeOutMusicAndLoadScene()
