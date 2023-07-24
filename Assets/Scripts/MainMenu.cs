@@ -89,10 +89,10 @@ public class MainMenu : MonoBehaviour
     {
 #if UNITY_EDITOR
         buttonClick.Play();
-        StartCoroutine(FadeOutMusicAndQuitEditor());
+        UnityEditor.EditorApplication.isPlaying = false;
 #else
         buttonClick.Play();
-        StartCoroutine(FadeOutMusicAndQuitApplication());
+        Application.Quit();
 #endif
     }
 
@@ -137,38 +137,4 @@ public class MainMenu : MonoBehaviour
             yield return null;
         }
     }
-
-    private IEnumerator FadeOutMusicAndQuitApplication()
-    {
-        float startVolume = menuBGM.volume;
-        float timer = 0f;
-
-        while (timer < musicFadeDuration)
-        {
-            timer += Time.deltaTime;
-            menuBGM.volume = Mathf.Lerp(startVolume, 0f, timer / musicFadeDuration);
-            yield return null;
-        }
-
-        // Quit the application
-        Application.Quit();
-    }
-
-#if UNITY_EDITOR
-    private IEnumerator FadeOutMusicAndQuitEditor()
-    {
-        float startVolume = menuBGM.volume;
-        float timer = 0f;
-
-        while (timer < musicFadeDuration)
-        {
-            timer += Time.deltaTime;
-            menuBGM.volume = Mathf.Lerp(startVolume, 0f, timer / musicFadeDuration);
-            yield return null;
-        }
-
-        // Quit the editor
-        UnityEditor.EditorApplication.isPlaying = false;
-    }
-#endif
 }
