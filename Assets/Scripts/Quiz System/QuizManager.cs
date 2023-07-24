@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+
 public class QuizManager : MonoBehaviour
 {
     [Header("Quiz Canvas")]
@@ -60,7 +60,6 @@ public class QuizManager : MonoBehaviour
             scoreManager.ResetScore(); // Reset the score when entering a new room
         }
     }
-
 
     private void OnTriggerExit(Collider other)
     {
@@ -181,13 +180,13 @@ public class QuizManager : MonoBehaviour
 
     private void InitializeQuestionPool()
     {
-        questionPool = questions.ToList();
+        questionPool.AddRange(questions);
     }
 
     private void GenerateQuestionSet()
     {
         ShuffleQuestions(questionPool);
-        foreach (var question in questionPool.Take(5))
+        foreach (var question in questionPool.GetRange(0, 5))
         {
             currentQuestionSet.Enqueue(question);
         }
@@ -217,12 +216,14 @@ public class QuizManager : MonoBehaviour
 
     private void ShuffleQuestions(List<Question> questionList)
     {
-        for (int i = 0; i < questionList.Count; i++)
+        int n = questionList.Count;
+        while (n > 1)
         {
-            Question temp = questionList[i];
-            int randomIndex = Random.Range(i, questionList.Count);
-            questionList[i] = questionList[randomIndex];
-            questionList[randomIndex] = temp;
+            n--;
+            int k = Random.Range(0, n + 1);
+            Question value = questionList[k];
+            questionList[k] = questionList[n];
+            questionList[n] = value;
         }
     }
 
@@ -231,7 +232,6 @@ public class QuizManager : MonoBehaviour
         quizButtonActivated = true;
     }
 }
-
 
 [System.Serializable]
 public class Question
