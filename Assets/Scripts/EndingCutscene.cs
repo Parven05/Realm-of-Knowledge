@@ -29,7 +29,6 @@ public class EndingCutscene : MonoBehaviour
     private Animator logoAnim;
     private Animator panelAnim;
 
-    private bool hasTransitioned = false;
     private bool hasPlayed = false;
 
     private void Start()
@@ -70,7 +69,6 @@ public class EndingCutscene : MonoBehaviour
 
     private IEnumerator PlayAnimationWithDelay()
     {
-        hasTransitioned = true;
 
         yield return new WaitForSeconds(delayBeforePanelAnimation);
 
