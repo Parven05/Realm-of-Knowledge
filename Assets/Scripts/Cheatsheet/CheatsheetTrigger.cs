@@ -6,6 +6,7 @@ public class CheatsheetTrigger : MonoBehaviour
 {
     [Header("Canvas")]
     [SerializeField] private GameObject cheatsheetCanvas;
+    [SerializeField] private AudioSource cheatsheetSFX;
 
     [Header("Dependencies")]
     [SerializeField] private FirstPersonController player;
@@ -65,6 +66,7 @@ public class CheatsheetTrigger : MonoBehaviour
 
     private void OpenCheatsheetCanvas()
     {
+        cheatsheetSFX.Play();
         Time.timeScale = 0f;
         isCheatsheetActive = true;
         cheatsheetCanvas.SetActive(true);
