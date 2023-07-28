@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class DoorCloseOnTrigger : MonoBehaviour
 {
-    [SerializeField] private GameObject doorTrigger;
+    [Header("Door")]
+    [SerializeField] private GameObject doorObject;
+    [SerializeField] private AudioSource doorCloseSfx;
+
+    private Animator doorAnimator;
+    private bool isDoorOpen = true;
 
     private void Start()
     {
-        doorTrigger.SetActive(true);
-    }
-    private void DoorClose()
-    {
-        doorTrigger.SetActive(false);
+        if (doorObject != null)
+            doorAnimator = doorObject.GetComponent<Animator>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && isDoorOpen)
         {
-            DoorClose();
+            doorAnimator.SetBool("isOpen", false);
+            doorCloseSfx.Play();
+            isDoorOpen = false;
         }
     }
 }

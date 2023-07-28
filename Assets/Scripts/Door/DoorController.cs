@@ -5,7 +5,6 @@ public class DoorController : MonoBehaviour
     [Header("Door")]
     [SerializeField] private GameObject doorObject;
     [SerializeField] private AudioSource doorOpenSfx;
-    [SerializeField] private AudioSource doorCloseSfx;
 
     private Animator doorAnimator;
     private bool isOpen = false;
@@ -14,8 +13,6 @@ public class DoorController : MonoBehaviour
     {
         if (doorObject != null)
             doorAnimator = doorObject.GetComponent<Animator>();
-        else
-            Debug.LogError("Door object is not assigned!");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,7 +25,7 @@ public class DoorController : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+   /* private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player") && isOpen)
         {
@@ -36,5 +33,5 @@ public class DoorController : MonoBehaviour
             doorCloseSfx.Play();
             isOpen = false;
         }
-    }
+    }*/
 }
