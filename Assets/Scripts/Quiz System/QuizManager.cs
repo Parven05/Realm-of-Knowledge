@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Runtime.InteropServices;
 
 public class QuizManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI questionText;
     [SerializeField] private Button[] answerButtons;
     [SerializeField] private Question[] questions;
+    [SerializeField] private AudioSource buttonClickedSFX;
 
     [Header("Result Canvas")]
     [SerializeField] private GameObject resultCanvas;
@@ -23,6 +25,7 @@ public class QuizManager : MonoBehaviour
 
     [Header("Dependencies")]
     [SerializeField] private FirstPersonController player;
+    [SerializeField] private GameObject crossHair;
 
     [SerializeField] private QuizCompletionHandler quizCompletionHandlers;
     [SerializeField] private bool quizCompletion;
@@ -76,6 +79,7 @@ public class QuizManager : MonoBehaviour
     {
         if (quizTriggered && !quizCompleted && Input.GetKeyDown(KeyCode.E))
         {
+            crossHair.SetActive(false);
             SetCursorState(true);
             Time.timeScale = 0f;
             player.cameraCanMove = false;
@@ -98,6 +102,8 @@ public class QuizManager : MonoBehaviour
 
     public void AnswerButtonClicked(int buttonIndex)
     {
+        //Play Sound
+        buttonClickedSFX.Play();
         Question currentQuestion = currentQuestionSet.Peek();
         if (buttonIndex == currentQuestion.correctAnswerIndex)
         {
@@ -129,6 +135,7 @@ public class QuizManager : MonoBehaviour
 
     private void QuizCompleted()
     {
+        crossHair.SetActive(false);
         Time.timeScale = 0f;
         quizCompleted = true;
         player.cameraCanMove = false;
@@ -153,6 +160,8 @@ public class QuizManager : MonoBehaviour
 
     private void ExitQuiz()
     {
+        buttonClickedSFX.Play();
+        crossHair.SetActive(true);
         SetCursorState(false);
         quizCompleted = false;
         Time.timeScale = 1f;
@@ -161,10 +170,13 @@ public class QuizManager : MonoBehaviour
         resultCanvas.SetActive(false);
         ResetQuiz();
         scoreManager.DisableScoreCanvas();
+        scoreManager.ResetScore();
     }
 
     private void TryAgain()
     {
+        buttonClickedSFX.Play();
+        crossHair.SetActive(false);
         SetCursorState(true);
         Time.timeScale = 0f;
         player.cameraCanMove = false;
