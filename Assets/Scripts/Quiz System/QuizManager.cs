@@ -26,6 +26,8 @@ public class QuizManager : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private FirstPersonController player;
     [SerializeField] private GameObject crossHair;
+    [SerializeField] private GameObject footstepsSFX;
+    [SerializeField] private GameObject jumpSFX;
 
     [SerializeField] private QuizCompletionHandler quizCompletionHandlers;
     [SerializeField] private bool quizCompletion;
@@ -47,6 +49,13 @@ public class QuizManager : MonoBehaviour
         tryAgainButton.onClick.AddListener(TryAgain);
         InitializeQuestionPool();
     }
+
+    void PlayerInteraction(bool enabled)
+    {
+        footstepsSFX.SetActive(enabled);
+        jumpSFX.SetActive(enabled);
+    }
+
 
     private void SetCursorState(bool enabled)
     {
@@ -79,6 +88,7 @@ public class QuizManager : MonoBehaviour
     {
         if (quizTriggered && !quizCompleted && Input.GetKeyDown(KeyCode.E))
         {
+            PlayerInteraction(false);
             crossHair.SetActive(false);
             SetCursorState(true);
             Time.timeScale = 0f;
@@ -161,6 +171,7 @@ public class QuizManager : MonoBehaviour
     private void ExitQuiz()
     {
         buttonClickedSFX.Play();
+        PlayerInteraction(true);
         crossHair.SetActive(true);
         SetCursorState(false);
         quizCompleted = false;

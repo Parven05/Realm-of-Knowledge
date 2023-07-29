@@ -24,7 +24,9 @@ public class EndingCutscene : MonoBehaviour
     [Header("Player")]
     [SerializeField] private GameObject footstepsSFX;
     [SerializeField] private GameObject jumpSFX;
+    [SerializeField] private GameObject pickupSFX;
     [SerializeField] private GameObject playerCursor;
+    
 
     private Animator logoAnim;
     private Animator panelAnim;
@@ -65,6 +67,7 @@ public class EndingCutscene : MonoBehaviour
         playerCursor.SetActive(enabled);
         footstepsSFX.SetActive(enabled);
         jumpSFX.SetActive(enabled);
+        pickupSFX.SetActive(enabled);
     }
 
     private IEnumerator PlayAnimationWithDelay()
