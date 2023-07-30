@@ -9,11 +9,14 @@ public class PauseMenu : MonoBehaviour
     [Header("Canvas")]
     [SerializeField] private GameObject backToMenuCanvas;
     [SerializeField] private GameObject pauseMenuCanvas;
+    [SerializeField] private GameObject controlsCanvas;
 
     [Header("Button")]
     [SerializeField] private Button pauseButton;
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private Button resumeButton;
+    [SerializeField] private Button controlButton;
+    [SerializeField] private Button controlBackButton;
     [SerializeField] private AudioSource buttonClickedSFX;
 
     [Header("Player")]
@@ -21,7 +24,6 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private FirstPersonController player;
     [SerializeField] private GameObject footstepsSFX;
     [SerializeField] private GameObject jumpSfx;
-
     
     [Header("Loading Screen")]
     [SerializeField] private GameObject loadingScreen;
@@ -38,6 +40,9 @@ public class PauseMenu : MonoBehaviour
         pauseButton.onClick.AddListener(NextLoad);
         mainMenuButton.onClick.AddListener(BackToMainMenu);
         resumeButton.onClick.AddListener(Resume);
+
+        controlButton.onClick.AddListener(GoToControlsMenu);
+        controlBackButton.onClick.AddListener(ControlsMenuBack);
     }
 
     void NextLoad()
@@ -97,6 +102,19 @@ public class PauseMenu : MonoBehaviour
         
     }
 
+    void GoToControlsMenu()
+    {
+        buttonClickedSFX.Play();
+        backToMenuCanvas.SetActive(false);
+        controlsCanvas.SetActive(true);
+    }
+
+    void ControlsMenuBack()
+    {
+        buttonClickedSFX.Play();
+        controlsCanvas.SetActive(false);
+        backToMenuCanvas.SetActive(true);
+    }
 
     void BackToMainMenu()
     {
