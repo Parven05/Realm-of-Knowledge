@@ -3,23 +3,42 @@ using UnityEngine.EventSystems;
 
 public class SystemLink : MonoBehaviour, IPointerClickHandler
 {
-    // Customize this variable with your GitHub link
-    [SerializeField] private string gitHubLink = "https://github.com/YourGitHubUsername/YourRepositoryName";
+    [Header("Links")]
+    [SerializeField] private bool enableGitHubLink = false;
+    [SerializeField] private bool enableYoutubeLink = false;
+    [SerializeField] private bool enablePatreonLink = false;
 
-    // Function to open the GitHub link in the default web browser
-    public void OpenLinkInBrowser()
+    [SerializeField] private string gitHubLink = "https://github.com/YourGitHubUsername/YourRepositoryName";
+    [SerializeField] private string youtubeLink = "https://youtube/YourChannelLink";
+    [SerializeField] private string patreonLink = "https://www.patreon.com/ProudBananaEntertainment";
+
+    public void OpenGithub()
     {
         Application.OpenURL(gitHubLink);
     }
 
-    // Implement the OnPointerClick method from IPointerClickHandler
-   public  void OnPointerClick(PointerEventData eventData)
+    public void OpenYoutube()
     {
-        // Check if the left mouse button was clicked
+        Application.OpenURL(youtubeLink);
+    }
+
+    public void OpenPatreonLink()
+    {
+        Application.OpenURL(patreonLink);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            // Open the GitHub link in the default web browser
-            OpenLinkInBrowser();
+            if (enableGitHubLink)
+                OpenGithub();
+
+            if (enableYoutubeLink)
+                OpenYoutube();
+
+            if (enablePatreonLink)
+                OpenPatreonLink();
         }
     }
 }
