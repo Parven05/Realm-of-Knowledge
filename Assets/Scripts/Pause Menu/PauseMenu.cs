@@ -8,8 +8,10 @@ public class PauseMenu : MonoBehaviour
 {
     [Header("Canvas")]
     [SerializeField] private GameObject backToMenuCanvas;
+    [SerializeField] private GameObject pauseTextCanvas;
     [SerializeField] private GameObject pauseMenuCanvas;
     [SerializeField] private GameObject controlsCanvas;
+    [SerializeField] private GameObject settingsCanvas;
 
     [Header("Button")]
     [SerializeField] private Button pauseButton;
@@ -17,6 +19,9 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Button resumeButton;
     [SerializeField] private Button controlButton;
     [SerializeField] private Button controlBackButton;
+    [SerializeField] private Button settingsButton;
+    [SerializeField] private Button settingsBackButton;
+
     [SerializeField] private AudioSource buttonClickedSFX;
 
     [Header("Player")]
@@ -30,7 +35,6 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Slider loadingSlider;
 
     public bool hasTriggered;
-    private bool hasPressedEscapeOnce = false;
 
     private void Start()
     {
@@ -43,11 +47,16 @@ public class PauseMenu : MonoBehaviour
 
         controlButton.onClick.AddListener(GoToControlsMenu);
         controlBackButton.onClick.AddListener(ControlsMenuBack);
+
+        settingsButton.onClick.AddListener(GoToSettingsMenu);
+        settingsBackButton.onClick.AddListener(SettingsMenuBack);
+
     }
 
     void NextLoad()
     {
         buttonClickedSFX.Play();
+        pauseTextCanvas.SetActive(false);
         pauseMenuCanvas.SetActive(false);
         backToMenuCanvas.SetActive(true);
     }
@@ -81,22 +90,23 @@ public class PauseMenu : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (!hasPressedEscapeOnce)
                 {
                     // First time pressing Escape
+                    pauseTextCanvas.SetActive(true);
                     Time.timeScale = 0f;
                     SetCursorState(true);
                     PlayerInteraction(false);
-                    hasPressedEscapeOnce = true;
+               
                 }
-                else
+               /* else
                 {
                     // Second time pressing Escape
+                    pauseTextCanvas.SetActive(false);
                     Time.timeScale = 1f;
                     SetCursorState(false);
                     PlayerInteraction(true);
                     hasPressedEscapeOnce = false; // Reset for the next time
-                }
+                }*/
             }
         }
         
@@ -109,10 +119,24 @@ public class PauseMenu : MonoBehaviour
         controlsCanvas.SetActive(true);
     }
 
+    void GoToSettingsMenu()
+    {
+        buttonClickedSFX.Play();
+        backToMenuCanvas.SetActive(false);
+        settingsCanvas.SetActive(true);
+    }    
+
     void ControlsMenuBack()
     {
         buttonClickedSFX.Play();
         controlsCanvas.SetActive(false);
+        backToMenuCanvas.SetActive(true);
+    }
+
+    void SettingsMenuBack()
+    {
+        buttonClickedSFX.Play();
+        settingsCanvas.SetActive(false);
         backToMenuCanvas.SetActive(true);
     }
 
