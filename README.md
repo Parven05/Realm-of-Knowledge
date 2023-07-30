@@ -1,4 +1,4 @@
-![Type](https://badgen.net/badge/Type/FinalYearProject/yellow)
+![Type](https://badgen.net/badge/Type/OpenSource/yellow)
 ![Status](https://badgen.net/badge/Status/Pre-release/orange?icon=github)
 ![Engine](https://badgen.net/badge/Engine/Unity/blue)
 ![License](https://badgen.net/badge/license/MIT/green)
