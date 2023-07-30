@@ -5,7 +5,7 @@ public class DoorActivation : MonoBehaviour
     [Header("Door")]
     [SerializeField] private GameObject doorObject;
     [SerializeField] private AudioSource doorOpenSfx;
-    [SerializeField] private AudioSource doorCloseSfx;
+   // [SerializeField] private AudioSource doorCloseSfx;
 
     [Header("Button")]
     [SerializeField] private Animator buttonAnimate;  
@@ -48,7 +48,7 @@ public class DoorActivation : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+  /*  private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag("DoorActivationCube") && doorActivated && buttonClicked)
         {
@@ -61,5 +61,5 @@ public class DoorActivation : MonoBehaviour
 
             doorAnimate.SetBool("isOpen", false);
         }
-    }
+    }*/
 }
