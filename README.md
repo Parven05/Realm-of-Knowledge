@@ -3,7 +3,7 @@
 ![Engine](https://badgen.net/badge/Engine/Unity/blue)
 ![License](https://badgen.net/badge/license/MIT/green)
 
-# **Final Year Project 2023 (Game - Unity Engine)**
+# **Quiz based Puzzle Game (Unity Engine)**
 ![Banner](https://user-images.githubusercontent.com/101796812/254477980-6a75f821-3def-4b2a-84e5-c30855070f72.png)
 
 ## **Introduction:**
