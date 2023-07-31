@@ -4,6 +4,7 @@ public class QuizCompletionHandler : MonoBehaviour
 {
     [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private AudioSource completedSfx;
+    [SerializeField] private Light buttonLight; // Reference to the light object
 
     private Renderer buttonRenderer;
     private bool colorChanged = false;
@@ -22,6 +23,14 @@ public class QuizCompletionHandler : MonoBehaviour
     private void SetButtonColor(Color color)
     {
         buttonRenderer.material.color = color;
+        // Set the emission color of the button's material (assuming it uses a standard shader)
+        buttonRenderer.material.SetColor("_EmissionColor", color); // You can adjust the multiplier (2f) to control the emission brightness
+
+        // Set the color of the light component
+        if (buttonLight != null)
+        {
+            buttonLight.color = color;
+        }
     }
 
     public void QuizCompletion()
@@ -37,5 +46,4 @@ public class QuizCompletionHandler : MonoBehaviour
             OnQuizCompleted?.Invoke();
         }
     }
-
 }
