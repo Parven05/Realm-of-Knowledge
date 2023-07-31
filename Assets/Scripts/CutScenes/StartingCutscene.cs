@@ -20,6 +20,9 @@ public class StartingCutscene : MonoBehaviour
     [SerializeField] private FirstPersonController playerMovement;
     [SerializeField] private GameObject playerCursor;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioSource lightHumSFX;
+
 
     private Animator panelAnim;
     private Animator loadingAnim;
@@ -38,6 +41,7 @@ public class StartingCutscene : MonoBehaviour
         playerMovement.enabled = false;
         playerCursor.SetActive(false);
         StartCoroutine(PlayAnimations());
+
     }
 
     private IEnumerator PlayAnimations()
@@ -58,6 +62,7 @@ public class StartingCutscene : MonoBehaviour
         yield return new WaitForSeconds(panelDelay);
         panelAnim.SetBool("isFade", true);
 
+        lightHumSFX.Play();
         playerFootsteps.enabled = true;
         playerMovement.enabled = true;
         playerCursor.SetActive(true);
