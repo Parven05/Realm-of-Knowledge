@@ -8,7 +8,7 @@ public class PauseMenu : MonoBehaviour
 {
     [Header("Canvas")]
     [SerializeField] private GameObject backToMenuCanvas;
-    [SerializeField] private GameObject pauseTextCanvas;
+   // [SerializeField] private GameObject pauseTextCanvas;
     [SerializeField] private GameObject pauseMenuCanvas;
     [SerializeField] private GameObject controlsCanvas;
     [SerializeField] private GameObject settingsCanvas;
@@ -56,7 +56,7 @@ public class PauseMenu : MonoBehaviour
     void NextLoad()
     {
         buttonClickedSFX.Play();
-        pauseTextCanvas.SetActive(false);
+       // pauseTextCanvas.SetActive(false);
         pauseMenuCanvas.SetActive(false);
         backToMenuCanvas.SetActive(true);
     }
@@ -92,7 +92,7 @@ public class PauseMenu : MonoBehaviour
             {
                 {
                     // First time pressing Escape
-                    pauseTextCanvas.SetActive(true);
+                   // pauseTextCanvas.SetActive(true);
                     Time.timeScale = 0f;
                     SetCursorState(true);
                     PlayerInteraction(false);
