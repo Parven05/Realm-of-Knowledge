@@ -11,6 +11,11 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button quitButton;
     [SerializeField] private Button backButton;
 
+    [Header("Start Items")]
+    [SerializeField] private Button classicButton;
+    [SerializeField] private Button funButton;
+    [SerializeField] private Button StartBackButton;
+
     [Header("Menu Music & Sound Effects")]
     [SerializeField] private AudioSource menuBGM;
     [SerializeField] private AudioSource buttonClick;
@@ -19,10 +24,14 @@ public class MainMenu : MonoBehaviour
     [Header("Animation After Clicked Buttons")]
     [SerializeField] private GameObject panel;
     [SerializeField] private GameObject mainCamera;
-    
-    [Header("Loading Screen")]
+
+    [Header("Loading Screen Classic")]
     public GameObject loadingScreen;
     public Slider loadingSlider;
+
+    [Header("Loading Screen Fun")]
+    public GameObject loadingFunScreen;
+    public Slider loadingFunSlider;
 
     [Header("Light Activation")]
     [SerializeField] private GameObject lightsToActivate;
@@ -33,6 +42,7 @@ public class MainMenu : MonoBehaviour
     [Header("Canvas")]
     [SerializeField] private GameObject menuCanvas;
     [SerializeField] private GameObject creditCanvas;
+    [SerializeField] private GameObject startCanvas;
 
     private Animator panelAnim;
     private Animator mainCameraAnim;
@@ -44,6 +54,7 @@ public class MainMenu : MonoBehaviour
 
         panel.SetActive(false);
         creditCanvas.SetActive(false);
+        startCanvas.SetActive(false);
 
         panelAnim = panel.GetComponent<Animator>();
         mainCameraAnim = mainCamera.GetComponent<Animator>();
@@ -52,12 +63,41 @@ public class MainMenu : MonoBehaviour
         creditButton.onClick.AddListener(LoadToCredit);
         quitButton.onClick.AddListener(QuitGame);
         backButton.onClick.AddListener(LoadToMenu);
+
+        classicButton.onClick.AddListener(LoadToGameScene);
+        funButton.onClick.AddListener(LoadToFunScene);
+
+        StartBackButton.onClick.AddListener(BackToMenu);
     }
 
     void PlayPanelAnimation()
     {
         panel.SetActive(true);
         panelAnim.SetBool("isFade", true);
+    }
+
+    void LoadToGameScene()
+    {
+        buttonClick.Play();
+        startCanvas.SetActive(false);
+        PlayPanelAnimation();
+        StartCoroutine(FadeOutMusicAndLoadSceneClassic());
+    }
+
+
+    void LoadToFunScene()
+    {
+        buttonClick.Play();
+        startCanvas.SetActive(false);
+        PlayPanelAnimation();
+        StartCoroutine(FadeOutMusicAndLoadSceneFun());
+    }
+
+    void BackToMenu()
+    {
+        buttonClick.Play();
+        startCanvas.SetActive(false);
+        menuCanvas.SetActive(true);
     }
 
     void LoadToMenu()
@@ -81,8 +121,10 @@ public class MainMenu : MonoBehaviour
     void LoadScene()
     {
         buttonClick.Play();
-        PlayPanelAnimation();
-        StartCoroutine(FadeOutMusicAndLoadScene());
+        startCanvas.SetActive(true);
+        menuCanvas.SetActive(false);
+
+
     }
 
     void QuitGame()
@@ -104,14 +146,14 @@ public class MainMenu : MonoBehaviour
         emissionMaterials.EnableKeyword("_EMISSION");
     }
 
-   void LightOffCredit()
+    void LightOffCredit()
     {
         //lightOnSfx.Play();
         lightsToActivate.SetActive(false);
         emissionMaterials.DisableKeyword("_EMISSION");
     }
 
-    private IEnumerator FadeOutMusicAndLoadScene()
+    private IEnumerator FadeOutMusicAndLoadSceneClassic()
     {
         float startVolume = menuBGM.volume;
         float timer = 0f;
@@ -134,6 +176,32 @@ public class MainMenu : MonoBehaviour
         {
             float progress = Mathf.Clamp01(asyncOperation.progress / 0.9f); // The progress goes from 0 to 0.9, so we normalize it to 0 to 1
             loadingSlider.value = progress;
+            yield return null;
+        }
+    }
+    private IEnumerator FadeOutMusicAndLoadSceneFun()
+    {
+        float startVolume = menuBGM.volume;
+        float timer = 0f;
+
+        while (timer < musicFadeDuration)
+        {
+            timer += Time.deltaTime;
+            menuBGM.volume = Mathf.Lerp(startVolume, 0f, timer / musicFadeDuration);
+            yield return null;
+        }
+
+        // Show the loading screen
+        loadingFunScreen.SetActive(true);
+
+        // Begin loading the scene asynchronously
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Fun");
+
+        // Update the loading progress
+        while (!asyncOperation.isDone)
+        {
+            float progress = Mathf.Clamp01(asyncOperation.progress / 0.9f); // The progress goes from 0 to 0.9, so we normalize it to 0 to 1
+            loadingFunSlider.value = progress;
             yield return null;
         }
     }

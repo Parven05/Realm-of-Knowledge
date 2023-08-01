@@ -143,6 +143,7 @@ public class PauseMenu : MonoBehaviour
     void BackToMainMenu()
     {
         buttonClickedSFX.Play();
+        backToMenuCanvas.SetActive(false);
         Time.timeScale = 1f;
         StartCoroutine(LoadingScreentoMenu());
     }
