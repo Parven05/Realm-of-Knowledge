@@ -15,6 +15,3 @@ Embark on a thrilling journey through the captivating world of programming langu
 
 ## **Debug Release:**
 https://github.com/Parven05/Realm-of-Knowledge/releases/tag/v.1.1-beta
-
-## **Link:**
-Youtube: https://www.youtube.com/channel/UC6VmwIq_5D7Z8LyGw3coI3g
