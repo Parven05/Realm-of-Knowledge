@@ -19,10 +19,6 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private Button tryAgainButton;
     [SerializeField] private Button exitButton;
 
-    [Header("Score Canvas")]
-    [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private ScoreManager scoreManager;
-
     [Header("Dependencies")]
     [SerializeField] private FirstPersonController player;
     [SerializeField] private GameObject crossHair;
@@ -41,7 +37,7 @@ public class QuizManager : MonoBehaviour
 
     private void Start()
     {
-        scoreManager.DisableScoreCanvas();
+        ScoreManager.instance.DisableScoreCanvas();
         quizCanvas.SetActive(false);
         resultCanvas.SetActive(false);
         SetCursorState(false);
@@ -69,7 +65,7 @@ public class QuizManager : MonoBehaviour
         {
             quizTriggered = true;
             SetCursorState(false);
-            scoreManager.ResetScore(); // Reset the score when entering a new room
+            ScoreManager.instance.ResetScore();
         }
     }
 
@@ -95,7 +91,7 @@ public class QuizManager : MonoBehaviour
             player.cameraCanMove = false;
             quizCanvas.SetActive(true);
             StartQuiz();
-            scoreManager.EnableScoreCanvas();
+            ScoreManager.instance.EnableScoreCanvas();
         }
     }
 
@@ -117,7 +113,7 @@ public class QuizManager : MonoBehaviour
         Question currentQuestion = currentQuestionSet.Peek();
         if (buttonIndex == currentQuestion.correctAnswerIndex)
         {
-            scoreManager.AddScore(currentQuestion.scorePoints);
+            ScoreManager.instance.AddScore(currentQuestion.scorePoints);
             correctAnswerCount++;
             if (correctAnswerCount == 5)
             {
@@ -151,17 +147,17 @@ public class QuizManager : MonoBehaviour
         player.cameraCanMove = false;
         quizCanvas.SetActive(false);
         resultCanvas.SetActive(true);
-        scoreManager.EnableScoreCanvas();
+        ScoreManager.instance.EnableScoreCanvas();
 
         string resultMessage = $"{correctAnswerCount} out of 5 answers are correct!";
         resultText.text = resultMessage;
 
-        int currentScore = scoreManager.GetCurrentScore();
-        scoreText.text = "Score: " + currentScore;
+        int currentScore = ScoreManager.instance.GetCurrentScore();
+        ScoreManager.instance.ChangeScoreText("Score: " + currentScore);
 
-        if (currentScore == scoreManager.GetRoomScoreLimit() && quizCompletion)
+        if (currentScore == ScoreManager.instance.GetRoomScoreLimit() && quizCompletion)
         {
-            if (quizCompletionHandlers != null) // Check if quizCompletionHandlers is not null before invoking the method
+            if (quizCompletionHandlers != null) 
             {
                 quizCompletionHandlers.QuizCompletion();
             }
@@ -180,8 +176,8 @@ public class QuizManager : MonoBehaviour
         quizCanvas.SetActive(false);
         resultCanvas.SetActive(false);
         ResetQuiz();
-        scoreManager.DisableScoreCanvas();
-        scoreManager.ResetScore();
+        ScoreManager.instance.DisableScoreCanvas();
+        ScoreManager.instance.ResetScore();
     }
 
     private void TryAgain()
@@ -193,12 +189,12 @@ public class QuizManager : MonoBehaviour
         player.cameraCanMove = false;
         quizCanvas.SetActive(true);
         resultCanvas.SetActive(false);
-        scoreManager.ResetScore();
+        ScoreManager.instance.ResetScore();
         correctAnswerCount = 0;
         quizCompleted = false;
         ResetQuiz(); // Reset the quiz before starting it again
         StartQuiz();
-        scoreManager.EnableScoreCanvas();
+        ScoreManager.instance.EnableScoreCanvas();
     }
 
     private void InitializeQuestionPool()
@@ -231,11 +227,7 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-    private void ResetQuiz()
-    {
-        correctAnswerCount = 0;
-        currentQuestionSet.Clear();
-    }
+ 
 
     private void ShuffleQuestions(List<Question> questionList)
     {
@@ -248,6 +240,12 @@ public class QuizManager : MonoBehaviour
             questionList[k] = questionList[n];
             questionList[n] = value;
         }
+    }
+
+    private void ResetQuiz()
+    {
+        correctAnswerCount = 0;
+        currentQuestionSet.Clear();
     }
 
     public void ActivateQuizButton()

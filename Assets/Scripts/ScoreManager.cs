@@ -4,14 +4,28 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
+    public static ScoreManager instance { get; private set; }
+
     public event System.Action<int> OnScoreUpdated;
 
     [Header("Score Canvas")]
-    [SerializeField] Canvas scoreCanvas;
+    [SerializeField] private Canvas scoreCanvas;
     [SerializeField] private TextMeshProUGUI scoreText;
     
     private int score = 0;
-    private int roomScoreLimit = 10; // Score limit per room
+    private int roomScoreLimit = 10;
+
+    private void Awake()
+    {
+        if(instance != null && instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
     public void AddScore(int points)
     {
@@ -49,6 +63,10 @@ public class ScoreManager : MonoBehaviour
     {
         scoreText.text = "Score: " + score.ToString();
         OnScoreUpdated?.Invoke(GetCurrentScore());
+    }
+    public void ChangeScoreText(string text)
+    {
+       scoreText.text = text;
     }
 
     public void EnableScoreCanvas()
