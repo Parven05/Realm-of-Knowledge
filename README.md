@@ -9,7 +9,7 @@
 ## **Introduction:**
 In this game, players face riddles and challenges requiring critical thinking. They use carried cubes to solve obstacles and move forward. These cubes activate switches, open doors, and trigger mechanisms.
 
-The game also features programming quiz questions about C++, Python, Java & JavaScript. This covers syntax, data structures, algorithms, and language-specific features.
+The game also features programming quiz questions about `C++`, `Python`, `Java` & `JavaScript`. This covers syntax, data structures, algorithms, and language-specific features.
 
 If stuck, players can use a cheatsheet for hints. This keeps the game engaging and helpful. Overall, it's an educational yet fun experience for those interested in gaming and programming.
 
