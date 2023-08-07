@@ -2,7 +2,7 @@
 ![Status](https://badgen.net/badge/Status/Release/orange?icon=github)
 ![Engine](https://badgen.net/badge/Engine/Unity/blue)
 ![License](https://badgen.net/badge/license/MIT/green)
-![Iframe](<iframe frameborder="0" src="https://itch.io/embed/2192646?bg_color=000000&amp;fg_color=ffffff" width="552" height="167"><a href="https://parven.itch.io/realm-of-knowledge">Realm of Knowledge by Parven</a></iframe>)
+![Itch_Banner](https://user-images.githubusercontent.com/101796812/258836620-b6e0f0b1-6a21-45ee-9dc3-74f1b103ab58.png)(https://parven.itch.io/realm-of-knowledge)
 
 # **Quiz based Puzzle Game (Unity Engine)**
 ![Banner](https://user-images.githubusercontent.com/101796812/254477980-6a75f821-3def-4b2a-84e5-c30855070f72.png)
