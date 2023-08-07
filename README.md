@@ -4,7 +4,7 @@
 ![License](https://badgen.net/badge/license/MIT/green)
 
 # **3D Quiz based Puzzle Game**
-![Banner](https://user-images.githubusercontent.com/101796812/254477980-6a75f821-3def-4b2a-84e5-c30855070f72.png)
+![Banner](https://user-images.githubusercontent.com/101796812/258840826-eda469e1-817a-413f-b990-b2b04e22db86.png)
 
 ## **Introduction:**
 In this game, players face riddles and challenges requiring critical thinking. They use carried cubes to solve obstacles and move forward. These cubes activate switches, open doors, and trigger mechanisms.
