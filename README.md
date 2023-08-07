@@ -22,4 +22,4 @@ Made for Windows PC, Mac & Linux
 https://github.com/Parven05/Realm-of-Knowledge/releases/tag/v.1.1-beta
 
 ## **Support:**
-
+[![Coffee_Banner](https://user-images.githubusercontent.com/101796812/258850302-9fe07b99-f397-452f-b8af-866b34b4160f.png)](https://www.buymeacoffee.com/parven)
