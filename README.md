@@ -3,8 +3,6 @@
 ![Engine](https://badgen.net/badge/Engine/Unity/blue)
 ![License](https://badgen.net/badge/license/MIT/green)
 
-<iframe frameborder="0" src="https://itch.io/embed/2192646?border_width=2&amp;bg_color=000000&amp;fg_color=ffffff" width="554" height="169"><a href="https://parven.itch.io/realm-of-knowledge">Realm of Knowledge by Parven, muhdizhar, beginnerDeveloper11</a></iframe>
-
 # **Quiz based Puzzle Game (Unity Engine)**
 ![Banner](https://user-images.githubusercontent.com/101796812/254477980-6a75f821-3def-4b2a-84e5-c30855070f72.png)
 
