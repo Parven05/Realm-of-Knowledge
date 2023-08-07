@@ -3,15 +3,15 @@
 ![Engine](https://badgen.net/badge/Engine/Unity/blue)
 ![License](https://badgen.net/badge/license/MIT/green)
 
-# **Quiz based Puzzle Game (Unity Engine)**
+# **3D Quiz based Puzzle Game**
 ![Banner](https://user-images.githubusercontent.com/101796812/254477980-6a75f821-3def-4b2a-84e5-c30855070f72.png)
 
 ## **Introduction:**
-Welcome to "Realm of Knowledge," a captivating 3D first-person quiz-based puzzle game. In this immersive game world, players delve into the realm of programming languages through engaging quizzes. As the main mechanic, players can pick up cubes strategically to solve puzzles that lead them closer to answering quiz questions.
+In this game, players face riddles and challenges requiring critical thinking. They use carried cubes to solve obstacles and move forward. These cubes activate switches, open doors, and trigger mechanisms.
 
-Set in an indoor environment, "Realm of Knowledge" offers a unique experience across four distinct levels, each representing a specific programming language: C++, Python, Java, and JavaScript. With Unity game engine as its foundation, the game seamlessly combines immersive gameplay, stunning visuals, and interactive challenges.
+The game also features programming quiz questions about C++, Python, Java & JavaScript. This covers syntax, data structures, algorithms, and language-specific features.
 
-Embark on a thrilling journey through the captivating world of programming languages and put your knowledge to the test. Are you ready to explore the depths of "Realm of Knowledge" and prove your programming prowess? Get ready for an exciting adventure where learning meets fun!
+If stuck, players can use a cheatsheet for hints. This keeps the game engaging and helpful. Overall, it's an educational yet fun experience for those interested in gaming and programming.
 
 ## **Official Release:**
 Made for Windows PC, Mac & Linux
