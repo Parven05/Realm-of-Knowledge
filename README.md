@@ -15,5 +15,3 @@ Embark on a thrilling journey through the captivating world of programming langu
 
 ## **Link:**
 Youtube: https://www.youtube.com/channel/UC6VmwIq_5D7Z8LyGw3coI3g
-
-Documentation: https://proud-banana-entertainment.github.io/Documentation/
