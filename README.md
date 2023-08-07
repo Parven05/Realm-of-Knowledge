@@ -20,3 +20,6 @@ Made for Windows PC, Mac & Linux
 
 ## **Debug Release:**
 https://github.com/Parven05/Realm-of-Knowledge/releases/tag/v.1.1-beta
+
+## **Support:**
+
