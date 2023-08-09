@@ -17,37 +17,26 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private GameObject resultCanvas;
     [SerializeField] private TextMeshProUGUI resultText;
 
-    [Header("Dependencies")]
-    [SerializeField] private FirstPersonController player;
-    [SerializeField] private GameObject crossHair;
-    [SerializeField] private GameObject footstepsSFX;
-    [SerializeField] private GameObject jumpSFX;
-
-    [SerializeField] private QuizCompletionHandler quizCompletionHandlers;
-    [SerializeField] private bool quizCompletion;
-
+    private FirstPersonController player;
     private List<Question> questionPool = new List<Question>();
     private Queue<Question> currentQuestionSet = new Queue<Question>();
-    private bool quizTriggered = false;
-    private bool quizCompleted = false;
+
     private int correctAnswerCount = 0;
+
+    private bool quizTriggered = false;
+    private bool quizCompleted = false;  
     private bool quizButtonActivated = false;
 
     private void Start()
     {
+        player = FindAnyObjectByType<FirstPersonController>();
+
         ScoreManager.instance.DisableScoreCanvas();
         quizCanvas.SetActive(false);
         resultCanvas.SetActive(false);
         SetCursorState(false);
         InitializeQuestionPool();
     }
-
-    void PlayerInteraction(bool enabled)
-    {
-        footstepsSFX.SetActive(enabled);
-        jumpSFX.SetActive(enabled);
-    }
-
 
     private void SetCursorState(bool enabled)
     {
@@ -80,8 +69,7 @@ public class QuizManager : MonoBehaviour
     {
         if (quizTriggered && !quizCompleted && Input.GetKeyDown(KeyCode.E))
         {
-            PlayerInteraction(false);
-            crossHair.SetActive(false);
+            Actions.onDisablePlayerInteraction?.Invoke();
             SetCursorState(true);
             Time.timeScale = 0f;
             player.cameraCanMove = false;
@@ -137,7 +125,6 @@ public class QuizManager : MonoBehaviour
 
     private void QuizCompleted()
     {
-        crossHair.SetActive(false);
         Time.timeScale = 0f;
         quizCompleted = true;
         player.cameraCanMove = false;
@@ -151,20 +138,17 @@ public class QuizManager : MonoBehaviour
         int currentScore = ScoreManager.instance.GetCurrentScore();
         ScoreManager.instance.ChangeScoreText("Score: " + currentScore);
 
-        if (currentScore == ScoreManager.instance.GetRoomScoreLimit() && quizCompletion)
+        if (currentScore == ScoreManager.instance.GetRoomScoreLimit())
         {
-            if (quizCompletionHandlers != null) 
-            {
-                quizCompletionHandlers.QuizCompletion();
-            }
+           Actions.onQuizCompleted?.Invoke();        
+           
         }
     }
 
-    private void ExitQuiz()
+    public void ExitQuiz()
     {
         buttonClickedSFX.Play();
-        PlayerInteraction(true);
-        crossHair.SetActive(true);
+        Actions.onEnablePlayerInteraction?.Invoke();
         SetCursorState(false);
         quizCompleted = false;
         Time.timeScale = 1f;
@@ -176,10 +160,9 @@ public class QuizManager : MonoBehaviour
         ScoreManager.instance.ResetScore();
     }
 
-    private void TryAgain()
+    public void TryAgain()
     {
         buttonClickedSFX.Play();
-        crossHair.SetActive(false);
         SetCursorState(true);
         Time.timeScale = 0f;
         player.cameraCanMove = false;
@@ -188,7 +171,7 @@ public class QuizManager : MonoBehaviour
         ScoreManager.instance.ResetScore();
         correctAnswerCount = 0;
         quizCompleted = false;
-        ResetQuiz(); // Reset the quiz before starting it again
+        ResetQuiz();
         StartQuiz();
         ScoreManager.instance.EnableScoreCanvas();
     }

@@ -1,18 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class Actions : MonoBehaviour
+public static class Actions
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static Action onDisablePlayerInteraction;
+    public static Action onEnablePlayerInteraction;
+    public static Action onQuizCompleted;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

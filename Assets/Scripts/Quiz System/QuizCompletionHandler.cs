@@ -33,6 +33,16 @@ public class QuizCompletionHandler : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        Actions.onQuizCompleted += QuizCompletion;
+    }
+
+    private void OnDisable()
+    {
+        Actions.onQuizCompleted -= QuizCompletion;
+    }
+
     public void QuizCompletion()
     {
         if (!colorChanged)
@@ -42,7 +52,6 @@ public class QuizCompletionHandler : MonoBehaviour
             colorChanged = true;
             isCompleted = true;
 
-            // Raise the OnQuizCompleted event when the quiz is completed
             OnQuizCompleted?.Invoke();
         }
     }
