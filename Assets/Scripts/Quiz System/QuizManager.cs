@@ -16,8 +16,6 @@ public class QuizManager : MonoBehaviour
     [Header("Result Canvas")]
     [SerializeField] private GameObject resultCanvas;
     [SerializeField] private TextMeshProUGUI resultText;
-    [SerializeField] private Button tryAgainButton;
-    [SerializeField] private Button exitButton;
 
     [Header("Dependencies")]
     [SerializeField] private FirstPersonController player;
@@ -41,8 +39,6 @@ public class QuizManager : MonoBehaviour
         quizCanvas.SetActive(false);
         resultCanvas.SetActive(false);
         SetCursorState(false);
-        exitButton.onClick.AddListener(ExitQuiz);
-        tryAgainButton.onClick.AddListener(TryAgain);
         InitializeQuestionPool();
     }
 
