@@ -10,7 +10,7 @@ public class QuizActivation : MonoBehaviour, ISetColor
     [SerializeField] private TextMeshProUGUI quizText;
 
     [Header("Required Cube")] 
-    CubeTags currentCubeTag;
+    [SerializeField] private CubeTags currentCubeTag;
 
     private Animator buttonAnimate;
     private Renderer buttonRenderer;
@@ -21,7 +21,6 @@ public class QuizActivation : MonoBehaviour, ISetColor
 
     private void Start()
     {
-        currentCubeTag = CubeTags.CubeUnknown;
         quizText.enabled = false;
 
         screenRenderer = quizScreen.GetComponent<Renderer>();
