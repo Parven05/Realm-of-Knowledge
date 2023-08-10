@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Runtime.InteropServices;
+using System;
 
 public class QuizManager : MonoBehaviour
 {
@@ -19,6 +19,8 @@ public class QuizManager : MonoBehaviour
 
     [SerializeField] private QuizCompletionHandler completionHandler;
 
+    public static Action<bool> onToggleQuiz;
+
     private FirstPersonController player;
     private List<Question> questionPool = new List<Question>();
     private Queue<Question> currentQuestionSet = new Queue<Question>();
@@ -33,17 +35,13 @@ public class QuizManager : MonoBehaviour
     {
         player = FindAnyObjectByType<FirstPersonController>();
 
+        this.enabled = false;
+
         ScoreManager.instance.DisableScoreCanvas();
         quizCanvas.SetActive(false);
         resultCanvas.SetActive(false);
-        SetCursorState(false);
-        InitializeQuestionPool();
-    }
 
-    private void SetCursorState(bool enabled)
-    {
-        Cursor.visible = enabled;
-        Cursor.lockState = enabled ? CursorLockMode.None : CursorLockMode.Locked;
+        InitializeQuestionPool();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -51,7 +49,6 @@ public class QuizManager : MonoBehaviour
         if (other.CompareTag("Player") && quizButtonActivated)
         {
             quizTriggered = true;
-            SetCursorState(false);
             ScoreManager.instance.ResetScore();
         }
     }
@@ -63,7 +60,6 @@ public class QuizManager : MonoBehaviour
             quizTriggered = false;
             quizCanvas.SetActive(false);
             resultCanvas.SetActive(false);
-            SetCursorState(false);
         }
     }
 
@@ -71,8 +67,9 @@ public class QuizManager : MonoBehaviour
     {
         if (quizTriggered && !quizCompleted && Input.GetKeyDown(KeyCode.E))
         {
-            Actions.onDisablePlayerInteraction?.Invoke();
-            SetCursorState(true);
+            AudioActions.onTogglePlayerAudio?.Invoke(false);
+            GameActions.onToggleCursorState?.Invoke(true);
+
             Time.timeScale = 0f;
             player.cameraCanMove = false;
             quizCanvas.SetActive(true);
@@ -153,8 +150,8 @@ public class QuizManager : MonoBehaviour
     public void ExitQuiz()
     {
         buttonClickedSFX.Play();
-        Actions.onEnablePlayerInteraction?.Invoke();
-        SetCursorState(false);
+        AudioActions.onTogglePlayerAudio?.Invoke(true);
+        GameActions.onToggleCursorState?.Invoke(false);
         quizCompleted = false;
         Time.timeScale = 1f;
         player.cameraCanMove = true;
@@ -168,17 +165,15 @@ public class QuizManager : MonoBehaviour
     public void TryAgain()
     {
         buttonClickedSFX.Play();
-        SetCursorState(true);
         Time.timeScale = 0f;
         player.cameraCanMove = false;
         quizCanvas.SetActive(true);
-        resultCanvas.SetActive(false);
+        ScoreManager.instance.DisableScoreCanvas();
         ScoreManager.instance.ResetScore();
         correctAnswerCount = 0;
         quizCompleted = false;
         ResetQuiz();
         StartQuiz();
-        ScoreManager.instance.EnableScoreCanvas();
     }
 
     private void InitializeQuestionPool()
@@ -219,7 +214,7 @@ public class QuizManager : MonoBehaviour
         while (n > 1)
         {
             n--;
-            int k = Random.Range(0, n + 1);
+            int k = UnityEngine.Random.Range(0, n + 1);
             Question value = questionList[k];
             questionList[k] = questionList[n];
             questionList[n] = value;
@@ -232,9 +227,26 @@ public class QuizManager : MonoBehaviour
         currentQuestionSet.Clear();
     }
 
-    public void ActivateQuizButton()
+    private void ActivateQuizButton(bool enabled)
     {
-        quizButtonActivated = true;
+        quizButtonActivated = enabled;
+    }
+
+    private void ToggleQuiz(bool enabled)
+    {
+        this.enabled = enabled;
+    }
+
+    private void OnEnable()
+    {
+        onToggleQuiz += ToggleQuiz;
+        onToggleQuiz += ActivateQuizButton;
+    }
+
+    private void OnDisable()
+    {
+        onToggleQuiz -= ToggleQuiz;
+        onToggleQuiz -= ActivateQuizButton;
     }
 }
 

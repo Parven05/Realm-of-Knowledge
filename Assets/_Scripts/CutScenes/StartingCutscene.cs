@@ -21,7 +21,7 @@ public class StartingCutscene : MonoBehaviour
     [SerializeField] private GameObject playerCursor;
 
     [Header("Sound Effects")]
-    [SerializeField] private AudioSource lightHumSFX;
+   
 
 
     private Animator panelAnim;
@@ -62,7 +62,7 @@ public class StartingCutscene : MonoBehaviour
         yield return new WaitForSeconds(panelDelay);
         panelAnim.SetBool("isFade", true);
 
-        lightHumSFX.Play();
+        AudioActions.onAmbiancePlay?.Invoke();
         playerFootsteps.enabled = true;
         playerMovement.enabled = true;
         playerCursor.SetActive(true);
