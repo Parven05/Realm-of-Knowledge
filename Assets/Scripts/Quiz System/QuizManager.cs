@@ -17,6 +17,8 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private GameObject resultCanvas;
     [SerializeField] private TextMeshProUGUI resultText;
 
+    [SerializeField] private QuizCompletionHandler completionHandler;
+
     private FirstPersonController player;
     private List<Question> questionPool = new List<Question>();
     private Queue<Question> currentQuestionSet = new Queue<Question>();
@@ -140,7 +142,10 @@ public class QuizManager : MonoBehaviour
 
         if (currentScore == ScoreManager.instance.GetRoomScoreLimit())
         {
-           Actions.onQuizCompleted?.Invoke();        
+          if (completionHandler != null)
+            {
+                completionHandler.QuizCompletion();
+            }
            
         }
     }

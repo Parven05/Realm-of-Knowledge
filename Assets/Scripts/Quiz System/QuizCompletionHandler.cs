@@ -33,16 +33,6 @@ public class QuizCompletionHandler : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        Actions.onQuizCompleted += QuizCompletion;
-    }
-
-    private void OnDisable()
-    {
-        Actions.onQuizCompleted -= QuizCompletion;
-    }
-
     public void QuizCompletion()
     {
         if (!colorChanged)
