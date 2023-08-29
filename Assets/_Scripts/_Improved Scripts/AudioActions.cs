@@ -15,5 +15,7 @@ public static class AudioActions
     public static Action onScreenAudioPlay;
 
     public static Action onAmbiancePlay;
+
+    public static Action onEndBgmPlay;
   
 }

@@ -10,22 +10,11 @@ public class EndingCutscene : MonoBehaviour
     [SerializeField] private GameObject panel;
     [SerializeField] private Button mainMenuButton;
 
-    [Header("Ending BGM & Sound Effect")]
-    [SerializeField] private AudioSource endBGM;
-    [SerializeField] private AudioSource buttonClick;
-
     [Header("Delay in ending scene")]
     [SerializeField] private float delayBeforePanelAnimation = 2.0f;
     [SerializeField] private float delayBeforeLogoAnimation = 2.0f;
     [SerializeField] private float delayBeforeLogoFadeAnimation = 2.0f;
     [SerializeField] private float buttonDelay = 2.0f;
-
-    [Header("Player")]
-    [SerializeField] private GameObject footstepsSFX;
-    [SerializeField] private GameObject jumpSFX;
-    [SerializeField] private GameObject pickupSFX;
-    [SerializeField] private GameObject playerCursor;
-    
 
     private Animator logoAnim;
     private Animator panelAnim;
@@ -37,13 +26,12 @@ public class EndingCutscene : MonoBehaviour
         logoAnim = logoImage.GetComponent<Animator>();
         panelAnim = panel.GetComponent<Animator>();
 
-        mainMenuButton.onClick.AddListener(BackToMainMenu);
         mainMenuButton.gameObject.SetActive(false);
     }
 
-    void BackToMainMenu()
+    public void BackToMainMenu()
     {
-        buttonClick.Play();
+        AudioActions.onUiButtonClickAudioPlay?.Invoke();
         SceneManager.LoadScene("Main Menu");
     }
 
@@ -55,28 +43,15 @@ public class EndingCutscene : MonoBehaviour
         }
     }
 
-    private void SetCursorState(bool enabled)
-    {
-        Cursor.visible = enabled;
-        Cursor.lockState = enabled ? CursorLockMode.None : CursorLockMode.Locked;
-    }
-
-    void PlayerInteraction(bool enabled)
-    {
-        playerCursor.SetActive(enabled);
-        footstepsSFX.SetActive(enabled);
-        jumpSFX.SetActive(enabled);
-        pickupSFX.SetActive(enabled);
-    }
-
     private IEnumerator PlayAnimationWithDelay()
     {
 
         yield return new WaitForSeconds(delayBeforePanelAnimation);
 
-        endBGM.Play();
+        AudioActions.onEndBgmPlay?.Invoke();
         panelAnim.SetBool("isFade", true);
-        PlayerInteraction(false);
+        AudioActions.onTogglePlayerAudio?.Invoke(false);
+        GameActions.onToggleCursorState?.Invoke(false);
         
 
         yield return new WaitForSeconds(delayBeforeLogoAnimation);
@@ -90,7 +65,7 @@ public class EndingCutscene : MonoBehaviour
         yield return new WaitForSeconds(buttonDelay);
 
         mainMenuButton.gameObject.SetActive(true);
-        SetCursorState(true);
+        GameActions.onToggleCursorState?.Invoke(true);
 
         hasPlayed = true;
     }

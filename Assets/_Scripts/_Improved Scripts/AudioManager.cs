@@ -24,6 +24,9 @@ public class AudioManager : MonoBehaviour
     [Header("Light Ambiance")]
     [SerializeField] private AudioSource lightHumSFX;
 
+    [Header("Ending")]
+    [SerializeField] private AudioSource endBgm;
+
     private void TogglePlayerAudio(bool enabled)
     {
         footstepsSFX.SetActive(enabled);
@@ -64,6 +67,11 @@ public class AudioManager : MonoBehaviour
         lightHumSFX.Play();
     }
 
+    private void EndBgmAudio()
+    {
+        endBgm.Play();
+    }
+
     private void OnEnable()
     {
         AudioActions.onTogglePlayerAudio += TogglePlayerAudio;
@@ -73,6 +81,7 @@ public class AudioManager : MonoBehaviour
         AudioActions.onUiButtonClickAudioPlay += uiButtonClickAudio;
         AudioActions.onScreenAudioPlay += ScreenOnAudio;
         AudioActions.onAmbiancePlay += LightHumSound;
+        AudioActions.onEndBgmPlay += EndBgmAudio;
     }
 
     private void OnDisable()
@@ -84,6 +93,7 @@ public class AudioManager : MonoBehaviour
         AudioActions.onUiButtonClickAudioPlay -= uiButtonClickAudio;
         AudioActions.onScreenAudioPlay -= ScreenOnAudio;
         AudioActions.onAmbiancePlay -= LightHumSound;
+        AudioActions.onEndBgmPlay -= EndBgmAudio;
     }
 
 }
