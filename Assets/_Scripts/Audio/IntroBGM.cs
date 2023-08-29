@@ -18,6 +18,4 @@ public class IntroBGM : MonoBehaviour
             introSoundEffect.PlayDelayed(introDelay);
         }
     }
-
-
 }

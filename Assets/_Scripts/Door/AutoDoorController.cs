@@ -1,11 +1,10 @@
+using System.Collections;
 using UnityEngine;
 
 public class AutoDoorController : MonoBehaviour
 {
     [Header("Door")]
-    [SerializeField] private GameObject doorObject; 
-    [SerializeField] private AudioSource doorOpenSfx;
-    [SerializeField] private AudioSource doorCloseSfx;
+    [SerializeField] private GameObject doorObject;
 
     [Header("Delay for DoorOpen")]
     [SerializeField] private float doorOpenDelay = 5f; 
@@ -20,16 +19,11 @@ public class AutoDoorController : MonoBehaviour
         StartCoroutine(OpenDoorAfterDelay());
     }
 
-    private System.Collections.IEnumerator OpenDoorAfterDelay()
+    private IEnumerator OpenDoorAfterDelay()
     {
         yield return new WaitForSeconds(doorOpenDelay);
         doorAnimator.SetBool("isOpen", true);
-        doorOpenSfx.Play();
+        AudioActions.onToggleDoorAudio?.Invoke(true);
     }
 
-    private void CloseDoor()
-    {
-        doorAnimator.SetBool("isOpen", false);
-        doorCloseSfx.Play();
-    }
 }
