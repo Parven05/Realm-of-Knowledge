@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StartingCutscene : MonoBehaviour
@@ -15,15 +14,6 @@ public class StartingCutscene : MonoBehaviour
     [SerializeField] private float loadingDelay = 1.5f;
     [SerializeField] private float quoteDelay = 2.0f;
 
-    [Header("Player")]
-    [SerializeField] private FootSteps playerFootsteps;
-    [SerializeField] private FirstPersonController playerMovement;
-    [SerializeField] private GameObject playerCursor;
-
-    [Header("Sound Effects")]
-   
-
-
     private Animator panelAnim;
     private Animator loadingAnim;
     private Animator quoteAnim;
@@ -37,9 +27,10 @@ public class StartingCutscene : MonoBehaviour
 
     private void Start()
     {
-        playerFootsteps.enabled = false;
-        playerMovement.enabled = false;
-        playerCursor.SetActive(false);
+        AudioActions.onTogglePlayerAudio?.Invoke(false);
+        GameActions.onTogglePlayerMovement?.Invoke(false);
+        GameActions.onToggleCursorState?.Invoke(false);
+
         StartCoroutine(PlayAnimations());
 
     }
@@ -63,8 +54,8 @@ public class StartingCutscene : MonoBehaviour
         panelAnim.SetBool("isFade", true);
 
         AudioActions.onAmbiancePlay?.Invoke();
-        playerFootsteps.enabled = true;
-        playerMovement.enabled = true;
-        playerCursor.SetActive(true);
+        AudioActions.onTogglePlayerAudio?.Invoke(true);
+        GameActions.onTogglePlayerMovement?.Invoke(true);
+        GameActions.onToggleCursorState?.Invoke(true);
     }
 }

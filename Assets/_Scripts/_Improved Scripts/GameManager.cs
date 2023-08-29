@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private FirstPersonController player;
     [SerializeField] private GameObject crossHair;
 
     private void Start()
@@ -16,14 +17,21 @@ public class GameManager : MonoBehaviour
         crossHair.SetActive(!enabled);
     }
 
+    private void SetPlayerMovementState(bool enabled)
+    {
+        player.enabled = enabled;
+    }
+
     private void OnEnable()
     {
         GameActions.onToggleCursorState += SetCursorState;
+        GameActions.onTogglePlayerMovement += SetPlayerMovementState;
     }
 
     private void OnDisable()
     {
         GameActions.onToggleCursorState -= SetCursorState;
+        GameActions.onTogglePlayerMovement -= SetPlayerMovementState;
     }
 }
 
