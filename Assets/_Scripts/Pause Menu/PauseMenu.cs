@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,27 +7,18 @@ public class PauseMenu : MonoBehaviour
 {
     [Header("Canvas")]
     [SerializeField] private GameObject backToMenuCanvas;
-   // [SerializeField] private GameObject pauseTextCanvas;
     [SerializeField] private GameObject pauseMenuCanvas;
     [SerializeField] private GameObject controlsCanvas;
     [SerializeField] private GameObject settingsCanvas;
 
-    [Header("Button")]
+ /*   [Header("Button")]
     [SerializeField] private Button pauseButton;
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private Button resumeButton;
     [SerializeField] private Button controlButton;
     [SerializeField] private Button controlBackButton;
     [SerializeField] private Button settingsButton;
-    [SerializeField] private Button settingsBackButton;
-
-    [SerializeField] private AudioSource buttonClickedSFX;
-
-    [Header("Player")]
-    [SerializeField] private GameObject playerCursor;
-    [SerializeField] private FirstPersonController player;
-    [SerializeField] private GameObject footstepsSFX;
-    [SerializeField] private GameObject jumpSfx;
+    [SerializeField] private Button settingsBackButton; */
     
     [Header("Loading Screen")]
     [SerializeField] private GameObject loadingScreen;
@@ -41,7 +31,7 @@ public class PauseMenu : MonoBehaviour
         hasTriggered = false;
         pauseMenuCanvas.SetActive(false);
 
-        pauseButton.onClick.AddListener(NextLoad);
+       /* pauseButton.onClick.AddListener(NextLoad);
         mainMenuButton.onClick.AddListener(BackToMainMenu);
         resumeButton.onClick.AddListener(Resume);
 
@@ -49,29 +39,27 @@ public class PauseMenu : MonoBehaviour
         controlBackButton.onClick.AddListener(ControlsMenuBack);
 
         settingsButton.onClick.AddListener(GoToSettingsMenu);
-        settingsBackButton.onClick.AddListener(SettingsMenuBack);
+        settingsBackButton.onClick.AddListener(SettingsMenuBack);*/
 
     }
 
     void NextLoad()
     {
-        buttonClickedSFX.Play();
-       // pauseTextCanvas.SetActive(false);
+        AudioActions.onUiButtonClickAudioPlay?.Invoke();
         pauseMenuCanvas.SetActive(false);
         backToMenuCanvas.SetActive(true);
     }
 
     void PlayerInteraction(bool enabled)
     {
-        playerCursor.SetActive(enabled);
-        player.cameraCanMove = enabled;
-        footstepsSFX.SetActive(enabled);
-        jumpSfx.SetActive(enabled);
+        GameActions.onToggleCursorState?.Invoke(enabled);
+        GameActions.onToggleCameraState?.Invoke(enabled);
+        AudioActions.onTogglePlayerAudio?.Invoke(enabled);    
     }
 
     void Resume()
     {
-        buttonClickedSFX.Play();
+        AudioActions.onUiButtonClickAudioPlay?.Invoke();
         Time.timeScale = 1f;
         PlayerInteraction(true);
         SetCursorState(false);
@@ -90,23 +78,9 @@ public class PauseMenu : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                {
-                    // First time pressing Escape
-                   // pauseTextCanvas.SetActive(true);
-                    Time.timeScale = 0f;
-                    SetCursorState(true);
-                    PlayerInteraction(false);
-               
-                }
-               /* else
-                {
-                    // Second time pressing Escape
-                    pauseTextCanvas.SetActive(false);
-                    Time.timeScale = 1f;
-                    SetCursorState(false);
-                    PlayerInteraction(true);
-                    hasPressedEscapeOnce = false; // Reset for the next time
-                }*/
+                Time.timeScale = 0f;
+                SetCursorState(true);
+                PlayerInteraction(false);
             }
         }
         
@@ -114,35 +88,35 @@ public class PauseMenu : MonoBehaviour
 
     void GoToControlsMenu()
     {
-        buttonClickedSFX.Play();
+        AudioActions.onUiButtonClickAudioPlay?.Invoke();
         backToMenuCanvas.SetActive(false);
         controlsCanvas.SetActive(true);
     }
 
     void GoToSettingsMenu()
     {
-        buttonClickedSFX.Play();
+        AudioActions.onUiButtonClickAudioPlay?.Invoke();
         backToMenuCanvas.SetActive(false);
         settingsCanvas.SetActive(true);
     }    
 
     void ControlsMenuBack()
     {
-        buttonClickedSFX.Play();
+        AudioActions.onUiButtonClickAudioPlay?.Invoke();
         controlsCanvas.SetActive(false);
         backToMenuCanvas.SetActive(true);
     }
 
     void SettingsMenuBack()
     {
-        buttonClickedSFX.Play();
+        AudioActions.onUiButtonClickAudioPlay?.Invoke();
         settingsCanvas.SetActive(false);
         backToMenuCanvas.SetActive(true);
     }
 
     void BackToMainMenu()
     {
-        buttonClickedSFX.Play();
+        AudioActions.onUiButtonClickAudioPlay?.Invoke();
         backToMenuCanvas.SetActive(false);
         Time.timeScale = 1f;
         StartCoroutine(LoadingScreentoMenu());

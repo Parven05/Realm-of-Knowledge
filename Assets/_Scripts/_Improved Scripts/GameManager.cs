@@ -17,6 +17,11 @@ public class GameManager : MonoBehaviour
         crossHair.SetActive(!enabled);
     }
 
+    private void SetCameraMoveState(bool enabled)
+    {
+        player.cameraCanMove = enabled;
+    }
+
     private void SetPlayerMovementState(bool enabled)
     {
         player.enabled = enabled;
@@ -26,12 +31,14 @@ public class GameManager : MonoBehaviour
     {
         GameActions.onToggleCursorState += SetCursorState;
         GameActions.onTogglePlayerMovement += SetPlayerMovementState;
+        GameActions.onToggleCameraState += SetCameraMoveState;
     }
 
     private void OnDisable()
     {
         GameActions.onToggleCursorState -= SetCursorState;
         GameActions.onTogglePlayerMovement -= SetPlayerMovementState;
+        GameActions.onToggleCameraState -= SetCameraMoveState;
     }
 }
 

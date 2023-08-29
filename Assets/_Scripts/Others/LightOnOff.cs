@@ -1,12 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-public class LightOnOff : MonoBehaviour
+public class LightOnOff : MonoBehaviour, ISetColor
 {
     [Header("Light Flickering")]
     [SerializeField] private GameObject lightsToActivate;
     [SerializeField] private Material emissionMaterials;
-    [SerializeField] private AudioSource lightOnSfx;
 
     [Header("Flicker Delay")]
     [SerializeField] private float activationDelay = 0.5f;
@@ -16,7 +15,6 @@ public class LightOnOff : MonoBehaviour
     [Header("Computer Screen On")]
     [SerializeField] private float screenDelay = 0.2f;
     [SerializeField] private GameObject quizScreen;
-    [SerializeField] private AudioSource screenOnSfx;
 
     private Renderer quizRenderer;
 
@@ -29,14 +27,14 @@ public class LightOnOff : MonoBehaviour
         }
         lightsToActivate.SetActive(false);
     }
-    private void SetScreenColor(Color color)
+    public void SetColor(Color color, Renderer renderer)
     {
-        quizRenderer.material.color = color;
+        renderer.material.color = color;
     }
 
     private void Start()
     {
-        SetScreenColor(Color.black);
+        SetColor(Color.black, quizRenderer);
         StartCoroutine(ActivateLightsWithDelay());
     }
 
@@ -46,7 +44,7 @@ public class LightOnOff : MonoBehaviour
 
         for (int i = 0; i < flickerCount; i++)
         {
-            lightOnSfx.Play();
+            AudioActions.onLightAudioPlay?.Invoke();
             lightsToActivate.SetActive(true);
             emissionMaterials.EnableKeyword("_EMISSION");
             yield return new WaitForSeconds(flickerInterval);
@@ -56,13 +54,13 @@ public class LightOnOff : MonoBehaviour
             yield return new WaitForSeconds(flickerInterval);
         }
 
-        
-        lightOnSfx.Play();
+
+        AudioActions.onLightAudioPlay?.Invoke();
         lightsToActivate.SetActive(true);
         emissionMaterials.EnableKeyword("_EMISSION");
 
         yield return new WaitForSeconds(screenDelay);
-        screenOnSfx.Play();
-        SetScreenColor(Color.white);
+        AudioActions.onScreenAudioPlay?.Invoke();
+        SetColor(Color.white, quizRenderer);
     }
 }

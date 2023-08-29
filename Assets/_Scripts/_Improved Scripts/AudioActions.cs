@@ -6,6 +6,12 @@ public static class AudioActions
 
     public static Action<bool> onToggleDoorAudio;
 
+    public static Action<bool> onToggleFallAudio;
+
+    public static Action<bool> onToggleLiftAudioPlay;
+
+    public static Action onLightAudioPlay;
+
     public static Action onCheatSheetAudioPlay;
 
     public static Action onButtonClickAudioPlay;

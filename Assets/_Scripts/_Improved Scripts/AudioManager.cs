@@ -11,6 +11,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource doorOpenSFX;
     [SerializeField] private AudioSource doorCloseSFX;
 
+    [Header("Lift")]
+    [SerializeField] private AudioSource liftSFX;
+
     [Header("Cheatsheet")]
     [SerializeField] private AudioSource cheatsheetSFX;
 
@@ -21,8 +24,14 @@ public class AudioManager : MonoBehaviour
     [Header("Screen")]
     [SerializeField] private AudioSource screenOnSFX;
 
+    [Header("Light On")]
+    [SerializeField] private AudioSource lightOnSFX;
+
     [Header("Light Ambiance")]
     [SerializeField] private AudioSource lightHumSFX;
+
+    [Header("Fall/Wind")]
+    [SerializeField] private AudioSource fallSFX;
 
     [Header("Ending")]
     [SerializeField] private AudioSource endBgm;
@@ -40,6 +49,21 @@ public class AudioManager : MonoBehaviour
             doorOpenSFX.Play();
         else      
             doorCloseSFX.Play();   
+    }
+    private void ToggleFallAudio(bool enabled)
+    { 
+        if(enabled)
+            fallSFX.Play();
+        else 
+            fallSFX.Stop();
+    }
+
+    private void ToggleLiftSound(bool enabled)
+    {
+        if(enabled)
+            liftSFX.Play();
+        else
+            liftSFX.Stop();
     }
 
     private void ButtonClickAudio()
@@ -62,10 +86,16 @@ public class AudioManager : MonoBehaviour
         cheatsheetSFX.Play();
     }
 
+    private void LightOnSound()
+    {
+        lightOnSFX.Play();
+    }
+
     private void LightHumSound()
     {
         lightHumSFX.Play();
     }
+
 
     private void EndBgmAudio()
     {
@@ -80,7 +110,10 @@ public class AudioManager : MonoBehaviour
         AudioActions.onButtonClickAudioPlay += ButtonClickAudio;
         AudioActions.onUiButtonClickAudioPlay += uiButtonClickAudio;
         AudioActions.onScreenAudioPlay += ScreenOnAudio;
+        AudioActions.onToggleLiftAudioPlay += ToggleLiftSound;
+        AudioActions.onLightAudioPlay += LightOnSound;
         AudioActions.onAmbiancePlay += LightHumSound;
+        AudioActions.onToggleFallAudio += ToggleFallAudio;
         AudioActions.onEndBgmPlay += EndBgmAudio;
     }
 
@@ -92,7 +125,10 @@ public class AudioManager : MonoBehaviour
         AudioActions.onButtonClickAudioPlay -= ButtonClickAudio;
         AudioActions.onUiButtonClickAudioPlay -= uiButtonClickAudio;
         AudioActions.onScreenAudioPlay -= ScreenOnAudio;
+        AudioActions.onToggleLiftAudioPlay -= ToggleLiftSound;
+        AudioActions.onLightAudioPlay -= LightOnSound;
         AudioActions.onAmbiancePlay -= LightHumSound;
+        AudioActions.onToggleFallAudio -= ToggleFallAudio;
         AudioActions.onEndBgmPlay -= EndBgmAudio;
     }
 
