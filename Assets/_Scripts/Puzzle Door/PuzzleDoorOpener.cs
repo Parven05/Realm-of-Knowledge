@@ -5,7 +5,6 @@ public class PuzzleDoorOpener : MonoBehaviour
     [Header("Door")]
     [SerializeField] private Animator doorAnimator;
     [SerializeField] private GameObject doorTrigger;
-    [SerializeField] private AudioSource doorOpenSfx;
 
     [Header("Required Object")]
     [SerializeField] private QuizCompletionHandler[] completionObjects;
@@ -39,7 +38,7 @@ public class PuzzleDoorOpener : MonoBehaviour
         // Play the door open sound only if the door is not already opened.
         if (!doorOpened)
         {
-            doorOpenSfx.Play();
+            AudioActions.onToggleDoorAudio?.Invoke(true);
             doorOpened = true;
         }
 

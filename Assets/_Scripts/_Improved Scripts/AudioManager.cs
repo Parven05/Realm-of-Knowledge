@@ -6,6 +6,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private GameObject footstepsSFX;
     [SerializeField] private GameObject jumpSFX;
     [SerializeField] private GameObject pickupSFX;
+    [SerializeField] private AudioSource pickupAudioSFX;
 
     [Header("Door")]
     [SerializeField] private AudioSource doorOpenSFX;
@@ -17,7 +18,7 @@ public class AudioManager : MonoBehaviour
     [Header("Cheatsheet")]
     [SerializeField] private AudioSource cheatsheetSFX;
 
-    [Header("Button")]
+    [Header("Buttons")]
     [SerializeField] private AudioSource buttonClickSFX;
     [SerializeField] private AudioSource uiButtonClickSFX;
 
@@ -33,6 +34,9 @@ public class AudioManager : MonoBehaviour
     [Header("Fall/Wind")]
     [SerializeField] private AudioSource fallSFX;
 
+    [Header("Completed")]
+    [SerializeField] private AudioSource completedSFX;
+
     [Header("Ending")]
     [SerializeField] private AudioSource endBgm;
 
@@ -41,6 +45,11 @@ public class AudioManager : MonoBehaviour
         footstepsSFX.SetActive(enabled);
         jumpSFX.SetActive(enabled);
         pickupSFX.SetActive(enabled);
+    }
+
+    private void PlayerPickupAudio()
+    {
+        pickupAudioSFX.Play();
     }
 
     private void ToggleDoorAudio(bool enabled)
@@ -95,7 +104,11 @@ public class AudioManager : MonoBehaviour
     {
         lightHumSFX.Play();
     }
-
+    
+    private void CompletedSound()
+    {
+        completedSFX.Play();
+    }
 
     private void EndBgmAudio()
     {
@@ -105,6 +118,7 @@ public class AudioManager : MonoBehaviour
     private void OnEnable()
     {
         AudioActions.onTogglePlayerAudio += TogglePlayerAudio;
+        AudioActions.onPlayerPickupAudioPlay += PlayerPickupAudio;
         AudioActions.onToggleDoorAudio += ToggleDoorAudio;
         AudioActions.onCheatSheetAudioPlay += CheatsheetSound;
         AudioActions.onButtonClickAudioPlay += ButtonClickAudio;
@@ -114,12 +128,14 @@ public class AudioManager : MonoBehaviour
         AudioActions.onLightAudioPlay += LightOnSound;
         AudioActions.onAmbiancePlay += LightHumSound;
         AudioActions.onToggleFallAudio += ToggleFallAudio;
+        AudioActions.onCompletedAudioPlay += CompletedSound;
         AudioActions.onEndBgmPlay += EndBgmAudio;
     }
 
     private void OnDisable()
     {
         AudioActions.onTogglePlayerAudio -= TogglePlayerAudio;
+        AudioActions.onPlayerPickupAudioPlay -= PlayerPickupAudio;
         AudioActions.onToggleDoorAudio -= ToggleDoorAudio;
         AudioActions.onCheatSheetAudioPlay -= CheatsheetSound;
         AudioActions.onButtonClickAudioPlay -= ButtonClickAudio;
@@ -129,6 +145,7 @@ public class AudioManager : MonoBehaviour
         AudioActions.onLightAudioPlay -= LightOnSound;
         AudioActions.onAmbiancePlay -= LightHumSound;
         AudioActions.onToggleFallAudio -= ToggleFallAudio;
+        AudioActions.onCompletedAudioPlay -= CompletedSound;
         AudioActions.onEndBgmPlay -= EndBgmAudio;
     }
 

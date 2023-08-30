@@ -10,6 +10,8 @@ public static class AudioActions
 
     public static Action<bool> onToggleLiftAudioPlay;
 
+    public static Action onPlayerPickupAudioPlay;
+
     public static Action onLightAudioPlay;
 
     public static Action onCheatSheetAudioPlay;
@@ -19,6 +21,8 @@ public static class AudioActions
     public static Action onUiButtonClickAudioPlay;
 
     public static Action onScreenAudioPlay;
+
+    public static Action onCompletedAudioPlay;
 
     public static Action onAmbiancePlay;
 

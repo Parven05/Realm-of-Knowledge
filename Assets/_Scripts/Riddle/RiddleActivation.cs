@@ -1,15 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class RiddleActivation : MonoBehaviour
+public class RiddleActivation : MonoBehaviour, ISetColor
 {
     [Header("Button")]
     [SerializeField] private Animator buttonAnimate;
-    [SerializeField] private AudioSource buttonClickSfx;
 
     [Header("Required Cube")]
-    [SerializeField] private string cubeTag;
+    [SerializeField] private CubeTags cubeTag;
 
     private Renderer buttonRenderer;
     private bool buttonClicked = false;
@@ -27,27 +24,27 @@ public class RiddleActivation : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag(cubeTag) && !buttonClicked)
+        if (collision.gameObject.CompareTag(cubeTag.ToString()) && !buttonClicked)
         {
             buttonClicked = true;
             buttonAnimate.SetBool("isClicked", true);
-            buttonClickSfx.Play();
-            SetButtonColor(Color.green);
+            AudioActions.onButtonClickAudioPlay?.Invoke();
+            SetColor(Color.green, buttonRenderer);
         }
     }
 
-    private void SetButtonColor(Color color)
+    public void SetColor(Color color, Renderer renderer)
     {
-        buttonRenderer.material.color = color;
+        renderer.material.color = color;
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag(cubeTag) && buttonClicked)
+        if (collision.gameObject.CompareTag(cubeTag.ToString()) && buttonClicked)
         {
             buttonClicked = false;
             buttonAnimate.SetBool("isClicked", false);
-            SetButtonColor(Color.red);
+            SetColor(Color.red, buttonRenderer);
         }
     }
 

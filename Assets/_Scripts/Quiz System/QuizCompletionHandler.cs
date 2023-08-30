@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public class QuizCompletionHandler : MonoBehaviour
+public class QuizCompletionHandler : MonoBehaviour, ISetColor
 {
     [SerializeField] private ScoreManager scoreManager;
-    [SerializeField] private AudioSource completedSfx;
     [SerializeField] private Light buttonLight; // Reference to the light object
 
     private Renderer buttonRenderer;
@@ -20,13 +19,12 @@ public class QuizCompletionHandler : MonoBehaviour
         buttonRenderer = GetComponent<Renderer>();
     }
 
-    private void SetButtonColor(Color color)
+    public void SetColor(Color color, Renderer renderer)
     {
-        buttonRenderer.material.color = color;
-        // Set the emission color of the button's material (assuming it uses a standard shader)
-        buttonRenderer.material.SetColor("_EmissionColor", color); // You can adjust the multiplier (2f) to control the emission brightness
+        renderer.material.color = color;
 
-        // Set the color of the light component
+        renderer.material.SetColor("_EmissionColor", color);
+
         if (buttonLight != null)
         {
             buttonLight.color = color;
@@ -37,8 +35,8 @@ public class QuizCompletionHandler : MonoBehaviour
     {
         if (!colorChanged)
         {
-            completedSfx.Play();
-            SetButtonColor(Color.green);
+            AudioActions.onCompletedAudioPlay?.Invoke();
+            SetColor(Color.green, buttonRenderer);
             colorChanged = true;
             isCompleted = true;
 

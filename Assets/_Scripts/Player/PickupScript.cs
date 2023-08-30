@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PickupScript : MonoBehaviour
@@ -8,7 +6,6 @@ public class PickupScript : MonoBehaviour
     [SerializeField] private Camera playerCam;
     [SerializeField] private Transform pickupTarget;
     [SerializeField] private float pickupRange;
-    [SerializeField] private AudioSource pickupSfx;
 
     private Rigidbody currentObject;
     private Vector3 currentVelocity;
@@ -31,10 +28,8 @@ public class PickupScript : MonoBehaviour
                     currentObject = hitInfo.rigidbody;
                     currentObject.useGravity = false;
 
-                    if (pickupSfx != null)
-                    {
-                        pickupSfx.Play();
-                    }
+                    AudioActions.onPlayerPickupAudioPlay?.Invoke();
+
                 }
             }
         }

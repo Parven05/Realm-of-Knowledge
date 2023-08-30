@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class QuizDoorOpener : MonoBehaviour
 {
     [SerializeField] private QuizManager quizManager;
     [SerializeField] private GameObject doorObject;
     [SerializeField] private GameObject doorTrigger;
-    [SerializeField] private AudioSource openDoorSFX;
     
     private Animator doorAnimator;
 
@@ -23,7 +20,7 @@ public class QuizDoorOpener : MonoBehaviour
         {
             doorAnimator.SetBool("isOpen", true);
             doorTrigger.SetActive(true);
-            openDoorSFX.Play();
+            AudioActions.onToggleDoorAudio?.Invoke(true);
         }
     }
 }
