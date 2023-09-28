@@ -20,6 +20,7 @@ public class CheatsheetTrigger : MonoBehaviour
             hasTriggered = true;
         }
     }
+    
 
     private void OnTriggerExit(Collider other)
     {
