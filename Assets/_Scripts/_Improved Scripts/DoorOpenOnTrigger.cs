@@ -28,4 +28,6 @@ public class DoorOpenOnTrigger : MonoBehaviour
             DoorOpen();
         }
     }
+    
+    
 }
