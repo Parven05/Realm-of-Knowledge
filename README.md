@@ -6,11 +6,16 @@
 ![Banner](https://user-images.githubusercontent.com/101796812/258840826-eda469e1-817a-413f-b990-b2b04e22db86.png)
 
 ## **Introduction:**
-In this game, players face riddles and challenges requiring critical thinking. They use carried cubes to solve obstacles and move forward. These cubes activate switches, open doors, and trigger mechanisms.
+🧠 Real of Knowledge
+Real of Knowledge is a puzzle-adventure game that blends logic challenges with programming quizzes. Players use cubes to activate switches, open doors, and solve obstacles to progress.
 
-The game also features programming quiz questions about `C++`, `Python`, `Java` & `JavaScript`. This covers syntax, data structures, algorithms, and language-specific features.
+🎮 Features:
 
-If stuck, players can use a cheatsheet for hints. This keeps the game engaging and helpful. Overall, it's an educational yet fun experience for those interested in gaming and programming.
+- Interactive cube mechanics
+- Programming questions on C++, Python, Java, and JavaScript
+- Topics include syntax, algorithms, and data structures
+- Built-in cheatsheet for hints when you're stuck
+- A fun and educational journey for gamers and aspiring programmers!
 
 ## **Official Release:**
 Made for Windows PC, Mac & Linux
@@ -19,6 +24,3 @@ Made for Windows PC, Mac & Linux
 
 ## **Debug Release:**
 https://github.com/Parven05/Realm-of-Knowledge/releases/tag/v.1.1-beta
-
-## **Support:**
-[![Coffee_Banner](https://user-images.githubusercontent.com/101796812/258850302-9fe07b99-f397-452f-b8af-866b34b4160f.png)](https://www.buymeacoffee.com/parven)
