@@ -3,7 +3,7 @@
 ![License](https://badgen.net/badge/license/MIT/green)
 
 # **3D First-Person Quiz based Educational Game**
-![Banner](https://user-images.githubusercontent.com/101796812/258840826-eda469e1-817a-413f-b990-b2b04e22db86.png)
+![realm](https://github.com/user-attachments/assets/c458581d-6060-4997-8bd6-bd608d7d5127)
 
 ## **Introduction:**
 Real of Knowledge is a puzzle-adventure game that blends logic challenges with programming quizzes. Players use cubes to activate switches, open doors, and solve obstacles to progress.
