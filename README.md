@@ -6,6 +6,7 @@
 ![realm1](https://github.com/user-attachments/assets/c458581d-6060-4997-8bd6-bd608d7d5127)
 ![realm2](https://github.com/user-attachments/assets/67261873-a080-4c25-9f42-7782fe513afc)
 ![realm3](https://github.com/user-attachments/assets/65db7ee7-67ee-4636-be8c-93258a8360bd)
+![realm4](https://github.com/user-attachments/assets/41f28a4f-e469-4cae-b93b-df6ccf0da97b)
 
 ## **Introduction:**
 Real of Knowledge is a puzzle-adventure game that blends logic challenges with programming quizzes. Players use cubes to activate switches, open doors, and solve obstacles to progress.
