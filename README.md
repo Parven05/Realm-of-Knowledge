@@ -6,10 +6,9 @@
 ![Banner](https://user-images.githubusercontent.com/101796812/258840826-eda469e1-817a-413f-b990-b2b04e22db86.png)
 
 ## **Introduction:**
-🧠 Real of Knowledge
 Real of Knowledge is a puzzle-adventure game that blends logic challenges with programming quizzes. Players use cubes to activate switches, open doors, and solve obstacles to progress.
 
-🎮 Features:
+Features:
 
 - Interactive cube mechanics
 - Programming questions on C++, Python, Java, and JavaScript
